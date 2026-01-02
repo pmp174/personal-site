@@ -1,157 +1,415 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.3">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio & Blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #000;
+        }
+
+        .header {
+            background: #000;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2.5rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-wrapper {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav ul li {
+            margin-bottom: 1rem;
+        }
+
+        .sidebar nav ul li a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            display: block;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            padding-left: 1rem;
+        }
+
+        .sidebar nav ul li a:hover {
+            border-left-color: #000;
+            transform: translateX(5px);
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 0;
+            margin: 0 auto 1.5rem;
+            display: block;
+            border: 4px solid #000;
+            object-fit: cover;
+        }
+
+        .desktop-pic {
+            display: block;
+        }
+
+        .main-content {
+            padding: 2.5rem;
+        }
+
+        .post {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .post:last-child {
+            border-bottom: none;
+        }
+
+        .post h2 {
+            color: #000;
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .post-meta {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-intro {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 3px solid #000;
+        }
+
+        .recipe {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .recipe h3 {
+            color: #000;
+            margin-bottom: 1rem;
+        }
+
+        .recipe-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .ingredients, .preparation {
+            margin-bottom: 1.5rem;
+        }
+
+        .ingredients h4, .preparation h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredients ul {
+            list-style-position: inside;
+            color: #555;
+        }
+
+        .ingredients ul li {
+            padding: 0.3rem 0;
+        }
+
+        .preparation p {
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #000;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        .mobile-header {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                padding: 1rem;
+            }
+
+            .mobile-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 1rem;
+            }
+
+            .desktop-pic {
+                display: none;
+            }
+
+            .mobile-left {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .profile-pic {
+                width: 60px;
+                height: 60px;
+                margin: 0;
+            }
+
+            .mobile-name {
+                font-weight: 600;
+                font-size: 1.1rem;
+                color: #333;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                padding: 0.5rem;
+            }
+
+            .menu-icon {
+                width: 24px;
+                height: 24px;
+                position: relative;
+                transition: transform 0.3s ease;
+            }
+
+            .menu-icon::before,
+            .menu-icon::after {
+                content: '';
+                position: absolute;
+                background: #000;
+                transition: transform 0.3s ease;
+            }
+
+            .menu-icon::before {
+                width: 24px;
+                height: 3px;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+            }
+
+            .menu-icon::after {
+                width: 3px;
+                height: 24px;
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+            }
+
+            .menu-icon.open::after {
+                transform: translateX(-50%) rotate(90deg);
+                opacity: 0;
+            }
+
+            .sidebar nav {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .sidebar nav.open {
+                max-height: 300px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+                letter-spacing: 0.2em;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<p class="p1">&lt;!doctype html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="utf-8" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Your Name — Blog / Portfolio&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="description" content="Personal blog and portfolio showcasing my work." /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="stylesheet" href="styles.css" /&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;header class="masthead"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="masthead__inner"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="masthead__title"&gt;MY WORK. LET ME SHOW YOU IT.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;button class="navToggle" type="button" aria-controls="siteNav" aria-expanded="false"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>Menu</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="layout"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Sidebar / Drawer --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;aside id="siteNav" class="nav" aria-label="Primary"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;nav class="nav__links"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#home"&gt;home&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#projects"&gt;projects&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#blog"&gt;blog&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#about"&gt;about&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#contact"&gt;contact&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/nav&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="nav__meta"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="small"&gt;Elsewhere&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" rel="me"&gt;instagram&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" rel="me"&gt;tiktok&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;a href="#" rel="me"&gt;linkedin&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/aside&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Main reading column --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="content" id="home"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;section class="intro"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;Hi, I’m &lt;span class="accent"&gt;Your Name&lt;/span&gt;.&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>This is my personal blog and portfolio. I publish short writeups, project notes,</p>
-<p class="p1"><span class="Apple-converted-space">          </span>and polished case studies. I like clean design, good typography, and practical work.</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="small"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>Tip: Keep posts short, add images, and link to the “projects” section for credibility.</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;section class="grid"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;article class="card" id="projects"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h2&gt;Featured Projects&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;ul class="list"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;a href="#"&gt;Project Name #1&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="small"&gt;One-line result statement (what improved, by how much).&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;a href="#"&gt;Project Name #2&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="small"&gt;What you built, for whom, why it matters.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;a href="#"&gt;Project Name #3&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">              </span>&lt;div class="small"&gt;Aesthetic + function. Include screenshots.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/article&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;aside class="figure"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;img src="https://picsum.photos/600/900" alt="A representative image for the sidebar aesthetic." /&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="small"&gt;Optional caption. Keep it mysterious.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/aside&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;section class="postList" id="blog"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2&gt;Recent Posts&lt;/h2&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;article class="post"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;&lt;a href="#"&gt;Pumpkin-curry soup (but make it a case study)&lt;/a&gt;&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="small"&gt;Jan 1, 2026 • 4 min read&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>A short excerpt goes here. Keep it punchy. On mobile, this should remain readable</p>
-<p class="p1"><span class="Apple-converted-space">            </span>with generous spacing and a comfortable line length.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/article&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;article class="post"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;&lt;a href="#"&gt;How I approached a tricky project constraint&lt;/a&gt;&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="small"&gt;Dec 12, 2025 • 6 min read&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Write as if you’re documenting for your future self: what you tried, what worked,</p>
-<p class="p1"><span class="Apple-converted-space">            </span>what you’d do differently.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/article&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;article class="post"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h3&gt;&lt;a href="#"&gt;Portfolio notes: what I’m building next&lt;/a&gt;&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;div class="small"&gt;Nov 29, 2025 • 3 min read&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>A “now” page style post works great and keeps the site alive without big essays.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/article&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;section class="split" id="about"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h2&gt;About&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Add a short bio, what you do, and the kinds of work you want more of.</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;ul class="list"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Skill / capability&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Skill / capability&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;li&gt;Skill / capability&lt;/li&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/ul&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="contact"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;h2&gt;Contact&lt;/h2&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Best way to reach me:</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="mailto:you@example.com"&gt;you@example.com&lt;/a&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;p class="small"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>If you want, add a simple contact form later (Netlify Forms is the easiest).</p>
-<p class="p1"><span class="Apple-converted-space">          </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/section&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;footer class="footer"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="small"&gt;© &lt;span id="year"&gt;&lt;/span&gt; Your Name. Built with HTML/CSS.&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">      </span>&lt;/footer&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="site.js"&gt;&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+    <header class="header">
+        <h1>MY PORTFOLIO: LET ME SHOW YOU IT.</h1>
+        <p>Personal thoughts, projects, and creative endeavors</p>
+    </header>
+
+    <div class="container">
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <div class="mobile-header">
+                    <div class="mobile-left">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop" alt="Profile" class="profile-pic">
+                        <span class="mobile-name">Your Name</span>
+                    </div>
+                    <div class="mobile-menu-toggle" onclick="toggleMenu()">
+                        <div class="menu-icon" id="menuIcon"></div>
+                    </div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop" alt="Profile" class="profile-pic desktop-pic">
+                <nav id="navMenu">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#recipes">Recipes</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main class="main-content">
+                <article class="post">
+                    <h2>Welcome to My Corner of the Web</h2>
+                    <div class="post-meta">Posted on January 1, 2026</div>
+                    <div class="post-intro">
+                        <p><strong>tucker</strong> \'tuck-er\, n. [Cf. tuck, n., s.] Daily food; meals; also, food in general. [Slang or Colloq.]</p>
+                    </div>
+                    
+                    <p>I'm a food geek. I love to cook and eat, and have a habit of making soups and stews at the drop of a hat, and in no quantity less than a gallon. I love inviting my friends over for dinners, and every Christmas I have my annual Onion Soup party, using my mother's French Onion Soup recipe. For my last housewarming, I made a couple of gallons of Black Bean Chili using a recipe I threw together one day a few years ago and have been refining ever since. Christmas eve tradition has become making lamb stew for my family.</p>
+
+                    <p>So I thought I'd share those, and a few other, recipes for the curious. Since I rarely stick closely to a recipe, I highly suggest that you taste and adjust the salt and spices as you go. That's how I do it, and it seems to work out just fine. Also, the golden rule of cooking is that you can <em>always</em> add more, but you can't get rid of something once it's in there. So err on the side of caution!</p>
+                </article>
+
+                <article class="post">
+                    <h2>Recent Recipes</h2>
+                    <div class="post-meta">Updated regularly</div>
+                    <span class="tag">Cooking</span>
+                    <span class="tag">Recipes</span>
+                    <span class="tag">Food</span>
+
+                    <div class="recipe">
+                        <h3>PUMPKIN-CURRY SOUP</h3>
+                        <div class="recipe-meta">Makes 8-ish servings</div>
+                        
+                        <div class="ingredients">
+                            <h4>Ingredients:</h4>
+                            <ul>
+                                <li>1 29oz can Libby pumpkin puree</li>
+                                <li>1 QT veggie stock</li>
+                                <li>2-3 tablespoons curry powder</li>
+                                <li>2 tablespoons salt</li>
+                                <li>1 pint heavy whipping cream</li>
+                            </ul>
+                        </div>
+
+                        <div class="preparation">
+                            <h4>Preparation:</h4>
+                            <p>Spoon pumpkin from can into 2 qt. saucepan. Fill can with veg stock, stir, to make sure you get all the pumpkin-y goodness. Add spices/salt to taste, and simmer for 1/2 hour over medium heat, until flavours are well blended. Add heavy cream, stir, enjoy. Can be topped with spoonful of honey (no, really—it's good!).</p>
+                            <p>For variations, you can substitute roasted garlic, or fresh grated ginger for curry.</p>
+                        </div>
+                    </div>
+
+                    <div class="recipe">
+                        <h3>ALMOST ENTIRELY SUGAR-FREE PUMPKIN-GINGER CHEESECAKE</h3>
+                        <div class="recipe-meta">Makes 12-ish servings</div>
+                        
+                        <div class="ingredients">
+                            <h4>Ingredients:</h4>
+                            <p><strong>Crust:</strong></p>
+                            <ul>
+                                <li>1/3rd cup softened butter</li>
+                                <li>1/4th cup graham cracker crumbs</li>
+                                <li>1/4th cup Splenda</li>
+                                <li>1 half teaspoon ground ginger</li>
+                            </ul>
+                            <p><strong>Filling:</strong></p>
+                            <ul>
+                                <li>24 oz cream cheese, softened</li>
+                                <li>1 cup Splenda</li>
+                                <li>1 15oz can pumpkin puree</li>
+                                <li>3 eggs</li>
+                                <li>1 teaspoon ground ginger</li>
+                                <li>1 teaspoon cinnamon</li>
+                            </ul>
+                        </div>
+
+                        <div class="preparation">
+                            <h4>Preparation:</h4>
+                            <p>Mix crust ingredients together and press into the bottom of a 9-inch springform pan. Bake at 350°F for 10 minutes. Let cool while preparing filling.</p>
+                            <p>Beat cream cheese and Splenda until smooth. Add pumpkin, eggs, and spices. Mix until well combined. Pour over crust and bake at 325°F for 50-60 minutes until center is almost set. Cool completely, then refrigerate for at least 4 hours before serving.</p>
+                        </div>
+                    </div>
+                </article>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navMenu');
+            const icon = document.getElementById('menuIcon');
+            nav.classList.toggle('open');
+            icon.classList.toggle('open');
+        }
+    </script>
 </body>
 </html>
