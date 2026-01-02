@@ -45,15 +45,18 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
+            overflow-x: hidden;
         }
 
         .content-wrapper {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
             border-radius: 28px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                        inset 0 1px 1px rgba(255, 255, 255, 0.4),
+                        0 0 0 1px rgba(255, 255, 255, 0.1);
             display: grid;
             grid-template-columns: 250px 1fr;
             overflow: hidden;
@@ -63,15 +66,12 @@
         .content-wrapper::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            inset: -2px;
             border-radius: 28px;
-            padding: 2px;
-            background: linear-gradient(135deg, 
+            padding: 3px;
+            background: linear-gradient(var(--mouse-angle, 135deg), 
                 rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0.8) 50%,
                 rgba(255, 255, 255, 0) 100%);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
@@ -79,10 +79,25 @@
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
+            z-index: 1;
         }
 
         .content-wrapper:hover::before {
             opacity: 1;
+        }
+
+        .content-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0) 100%);
+            border-radius: 28px 28px 0 0;
+            pointer-events: none;
         }
 
         .sidebar {
@@ -130,9 +145,10 @@
         .sidebar nav ul li a:hover {
             border-left-color: #fff;
             transform: translateX(5px);
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                        0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .profile-pic {
@@ -154,12 +170,22 @@
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
         }
 
         .post {
             margin-bottom: 3rem;
             padding-bottom: 2rem;
             border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            max-width: 100%;
+        }
+
+        .post * {
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
         }
 
         .post:last-child {
@@ -188,11 +214,65 @@
 
         .post p {
             color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+        }
+
+        .post-preview {
+            max-height: 150px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .post-preview.expanded {
+            max-height: none;
+        }
+
+        .post-preview::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.06));
+            pointer-events: none;
+        }
+
+        .post-preview.expanded::after {
+            display: none;
+        }
+
+        .read-more-btn {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                        0 2px 8px rgba(0, 0, 0, 0.2);
+            font-family: inherit;
+        }
+
+        .read-more-btn:hover {
+            background: rgba(255, 255, 255, 0.22);
+            transform: translateY(-1px);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                        0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .read-more-btn:active {
+            transform: translateY(0);
         }
 
         .tag {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.18);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             color: white;
@@ -201,8 +281,9 @@
             font-size: 0.85rem;
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                        0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .mobile-menu-toggle {
@@ -273,6 +354,7 @@
                 position: absolute;
                 background: #fff;
                 transition: transform 0.3s ease;
+                box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
             }
 
             .menu-icon::before {
@@ -362,9 +444,16 @@
                     <span class="tag">Personal</span>
                     <span class="tag">Life</span>
                     
-                    <p>This is where your first blog post content goes. Write about your thoughts, experiences, or anything you'd like to share. You can include multiple paragraphs to make your post more detailed.</p>
-                    
-                    <p>Add more paragraphs as needed to tell your story or share your thoughts.</p>
+                    <div class="post-preview" id="post1-preview">
+                        <p>This is where your first blog post content goes. Write about your thoughts, experiences, or anything you'd like to share. You can include multiple paragraphs to make your post more detailed.</p>
+                        
+                        <p>Add more paragraphs as needed to tell your story or share your thoughts.</p>
+                        
+                        <p>Here's even more content that will be hidden initially. This demonstrates how the read more functionality works. You can write as much as you want, and only a preview will be shown initially.</p>
+                        
+                        <p>Keep adding content and the user will be able to expand it when they click "Read More".</p>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore('post1')">Read More</button>
                 </article>
 
                 <article class="post">
@@ -373,9 +462,14 @@
                     <span class="tag">Thoughts</span>
                     <span class="tag">Musings</span>
                     
-                    <p>Your second blog post content here. Each post can have its own tags to categorize the content.</p>
-                    
-                    <p>Feel free to write as much or as little as you want for each post.</p>
+                    <div class="post-preview" id="post2-preview">
+                        <p>Your second blog post content here. Each post can have its own tags to categorize the content.</p>
+                        
+                        <p>Feel free to write as much or as little as you want for each post.</p>
+                        
+                        <p>Additional content that will be collapsed by default. This helps keep your homepage clean and organized while still allowing readers to dive deeper into posts that interest them.</p>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore('post2')">Read More</button>
                 </article>
 
                 <article class="post">
@@ -383,7 +477,12 @@
                     <div class="post-meta">Posted on January 10, 2026</div>
                     <span class="tag">Creative</span>
                     
-                    <p>More blog content goes here. You can add images, links, or format the text however you like.</p>
+                    <div class="post-preview" id="post3-preview">
+                        <p>More blog content goes here. You can add images, links, or format the text however you like.</p>
+                        
+                        <p>This is another paragraph that demonstrates the preview functionality. The read more button gives users control over what they want to read.</p>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore('post3')">Read More</button>
                 </article>
             </main>
         </div>
@@ -395,6 +494,21 @@
             const icon = document.getElementById('menuIcon');
             nav.classList.toggle('open');
             icon.classList.toggle('open');
+        }
+
+        function toggleReadMore(postId) {
+            const preview = document.getElementById(postId + '-preview');
+            const btn = event.target;
+            
+            if (preview.classList.contains('expanded')) {
+                preview.classList.remove('expanded');
+                btn.textContent = 'Read More';
+                // Scroll to the post title smoothly
+                preview.closest('.post').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                preview.classList.add('expanded');
+                btn.textContent = 'Read Less';
+            }
         }
 
         // Dynamic edge highlight based on mouse position
