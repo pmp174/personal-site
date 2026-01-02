@@ -50,48 +50,34 @@
 
         .content-wrapper {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(40px) saturate(180%);
-            -webkit-backdrop-filter: blur(40px) saturate(180%);
-            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            filter: url(#glass-distortion);
+            border: 1.5px solid rgba(255, 255, 255, 0.25);
             border-radius: 28px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
-                        inset 0 1px 1px rgba(255, 255, 255, 0.4),
-                        0 0 0 1px rgba(255, 255, 255, 0.1);
+                        inset 0 1px 1px rgba(255, 255, 255, 0.3);
             display: grid;
             grid-template-columns: 250px 1fr;
             overflow: hidden;
             position: relative;
+            isolation: isolate;
         }
 
         .content-wrapper::before {
             content: '';
             position: absolute;
-            inset: -2px;
+            inset: 0;
             border-radius: 28px;
             background: radial-gradient(
-                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(255, 255, 255, 0.4) 0%,
-                rgba(255, 255, 255, 0.2) 20%,
-                transparent 60%
+                circle 400px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.25),
+                transparent
             );
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
             pointer-events: none;
-            z-index: 1;
-            mask-image: radial-gradient(
-                circle at center,
-                transparent 0%,
-                transparent calc(100% - 120px),
-                black calc(100% - 80px),
-                black 100%
-            );
-            -webkit-mask-image: radial-gradient(
-                circle at center,
-                transparent 0%,
-                transparent calc(100% - 120px),
-                black calc(100% - 80px),
-                black 100%
-            );
+            mix-blend-mode: overlay;
         }
 
         .content-wrapper:hover::before {
@@ -104,20 +90,21 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 50%;
+            height: 40%;
             background: linear-gradient(180deg, 
-                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0.12) 0%, 
                 rgba(255, 255, 255, 0) 100%);
             border-radius: 28px 28px 0 0;
             pointer-events: none;
         }
 
         .sidebar {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 2rem;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.12);
+            z-index: 1;
         }
 
         .sidebar nav ul {
@@ -144,8 +131,7 @@
             transform: translateX(5px);
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
-                        0 2px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .profile-pic {
@@ -164,18 +150,19 @@
 
         .main-content {
             padding: 2.5rem;
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             overflow-wrap: break-word;
             word-wrap: break-word;
             word-break: break-word;
+            z-index: 1;
         }
 
         .post {
             margin-bottom: 3rem;
             padding-bottom: 2rem;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.08);
             max-width: 100%;
         }
 
@@ -240,7 +227,7 @@
             font-size: 0.9rem;
             margin-top: 1rem;
             transition: all 0.3s ease;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
                         0 2px 8px rgba(0, 0, 0, 0.2);
             font-family: inherit;
         }
@@ -248,7 +235,7 @@
         .read-more-btn:hover {
             background: rgba(255, 255, 255, 0.22);
             transform: translateY(-1px);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
                         0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
@@ -258,7 +245,7 @@
 
         .tag {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.18);
+            background: rgba(255, 255, 255, 0.16);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             color: white;
@@ -267,9 +254,9 @@
             font-size: 0.85rem;
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                        0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
+                        0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .mobile-menu-toggle {
@@ -287,7 +274,7 @@
 
             .sidebar {
                 border-right: none;
-                border-bottom: 1px solid #e0e0e0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                 padding: 1rem;
             }
 
@@ -386,6 +373,30 @@
     </style>
 </head>
 <body>
+    <!-- SVG Filter for Liquid Glass Distortion Effect -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute; overflow:hidden">
+        <defs>
+            <filter id="glass-distortion" x="0%" y="0%" width="100%" height="100%">
+                <feTurbulence 
+                    type="fractalNoise" 
+                    baseFrequency="0.008 0.008" 
+                    numOctaves="2" 
+                    seed="92" 
+                    result="noise"/>
+                <feGaussianBlur 
+                    in="noise" 
+                    stdDeviation="2" 
+                    result="blurred"/>
+                <feDisplacementMap 
+                    in="SourceGraphic" 
+                    in2="blurred" 
+                    scale="77" 
+                    xChannelSelector="R" 
+                    yChannelSelector="G"/>
+            </filter>
+        </defs>
+    </svg>
+
     <header class="header">
         <h1>Pmp174</h1>
         <p>Personal thoughts, ramblings, and creative endeavors of a mildly depressed zillenial</p>
@@ -489,7 +500,6 @@
             if (preview.classList.contains('expanded')) {
                 preview.classList.remove('expanded');
                 btn.textContent = 'Read More';
-                // Scroll to the post title smoothly
                 preview.closest('.post').scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
                 preview.classList.add('expanded');
@@ -497,7 +507,7 @@
             }
         }
 
-        // Dynamic edge highlight based on mouse position
+        // Mouse tracking for edge highlight effect
         const contentWrapper = document.querySelector('.content-wrapper');
         
         contentWrapper.addEventListener('mousemove', (e) => {
@@ -505,7 +515,6 @@
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
-            // Convert to percentage
             const xPercent = (x / rect.width) * 100;
             const yPercent = (y / rect.height) * 100;
             
@@ -513,7 +522,7 @@
             contentWrapper.style.setProperty('--mouse-y', `${yPercent}%`);
         });
 
-        // Load and display blog posts from markdown files
+        // Load blog posts from markdown files
         const blogPosts = [
             { file: 'posts/welcome.md', isWelcome: true },
             { file: 'posts/first-post.md' },
@@ -523,9 +532,6 @@
 
         async function loadBlogPosts() {
             const mainContent = document.querySelector('.main-content');
-            
-            // Try to load posts from markdown files
-            let postsLoaded = false;
             
             for (const post of blogPosts) {
                 try {
@@ -539,49 +545,37 @@
                             article.className = 'post';
                             article.innerHTML = htmlContent;
                             mainContent.appendChild(article);
-                            postsLoaded = true;
                         }
                     }
                 } catch (error) {
-                    // If markdown files don't exist, keep the default HTML posts
                     console.log('Using default HTML posts');
                     break;
                 }
             }
         }
 
-        // Simple markdown parser (basic implementation)
         function parseMarkdown(markdown) {
             let html = markdown;
             
-            // Parse headers
             html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
             html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
             html = html.replace(/^# (.*$)/gim, '<h2>$1</h2>');
-            
-            // Parse metadata (date and tags)
             html = html.replace(/^date: (.*)$/gim, '<div class="post-meta">Posted on $1</div>');
             html = html.replace(/^tags: (.*)$/gim, (match, tags) => {
                 const tagArray = tags.split(',').map(t => t.trim());
                 return tagArray.map(tag => `<span class="tag">${tag}</span>`).join('');
             });
             
-            // Parse bold and italic
             html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
             html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-            
-            // Parse paragraphs
             html = html.replace(/\n\n/g, '</p><p>');
             html = '<p>' + html + '</p>';
-            
-            // Clean up empty paragraphs
             html = html.replace(/<p><\/p>/g, '');
             
             return html;
         }
 
-        // Load posts when page loads
         window.addEventListener('DOMContentLoaded', loadBlogPosts);
     </script>
 </body>
