@@ -185,6 +185,17 @@
 
         .music-icon {
             font-size: 1.1rem;
+            display: inline-block;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Bubble tail/pointer */
@@ -330,6 +341,10 @@
             display: none;
         }
 
+        .mobile-music {
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .content-wrapper {
                 grid-template-columns: 1fr;
@@ -352,10 +367,21 @@
                 display: none;
             }
 
-            /* Hide music bubble on mobile */
-            .music-bubble,
+            /* Hide desktop music bubble on mobile */
+            .profile-container .music-bubble,
             .bubble-tail {
                 display: none;
+            }
+
+            /* Show mobile music bubble */
+            .mobile-music {
+                display: flex;
+                font-size: 0.75rem;
+                padding: 0.4rem 0.7rem;
+            }
+            
+            .mobile-music .music-icon {
+                font-size: 0.9rem;
             }
 
             .mobile-left {
@@ -427,10 +453,14 @@
                         <img src="images/profile.jpeg" alt="Profile" class="profile-pic">
                         <span class="mobile-name">Darby</span>
                     </div>
+                    <div class="music-bubble mobile-music">
+                        <span class="music-icon">💿</span>
+                        <span>Lofi Hip Hop</span>
+                    </div>
                 </div>
                 <div class="profile-container">
                     <div class="music-bubble">
-                        <span class="music-icon">🎵</span>
+                        <span class="music-icon">💿</span>
                         <span>Lofi Hip Hop</span>
                     </div>
                     <div class="bubble-tail"></div>
