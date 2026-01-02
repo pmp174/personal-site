@@ -66,21 +66,32 @@
         .content-wrapper::before {
             content: '';
             position: absolute;
-            inset: -150px;
+            inset: -2px;
             border-radius: 28px;
-            background: conic-gradient(from var(--mouse-angle, 135deg) at 50% 50%, 
-                transparent 0deg,
-                transparent 60deg,
-                rgba(255, 255, 255, 0.6) 90deg,
-                rgba(255, 255, 255, 0.8) 100deg,
-                rgba(255, 255, 255, 0.6) 110deg,
-                transparent 140deg,
-                transparent 360deg);
+            background: radial-gradient(
+                600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.4) 0%,
+                rgba(255, 255, 255, 0.2) 20%,
+                transparent 60%
+            );
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.3s ease;
             pointer-events: none;
             z-index: 1;
-            filter: blur(40px);
+            mask-image: radial-gradient(
+                circle at center,
+                transparent 0%,
+                transparent calc(100% - 120px),
+                black calc(100% - 80px),
+                black 100%
+            );
+            -webkit-mask-image: radial-gradient(
+                circle at center,
+                transparent 0%,
+                transparent calc(100% - 120px),
+                black calc(100% - 80px),
+                black 100%
+            );
         }
 
         .content-wrapper:hover::before {
@@ -494,15 +505,12 @@
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
+            // Convert to percentage
+            const xPercent = (x / rect.width) * 100;
+            const yPercent = (y / rect.height) * 100;
             
-            const angleX = (x - centerX) / centerX;
-            const angleY = (y - centerY) / centerY;
-            
-            const angle = Math.atan2(angleY, angleX) * (180 / Math.PI);
-            
-            contentWrapper.style.setProperty('--mouse-angle', `${angle}deg`);
+            contentWrapper.style.setProperty('--mouse-x', `${xPercent}%`);
+            contentWrapper.style.setProperty('--mouse-y', `${yPercent}%`);
         });
 
         // Load and display blog posts from markdown files
