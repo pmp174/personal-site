@@ -46,23 +46,23 @@
         }
 
         .content-wrapper {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             display: grid;
             grid-template-columns: 250px 1fr;
             overflow: hidden;
         }
 
         .sidebar {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 2rem;
-            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .sidebar nav ul {
@@ -87,16 +87,17 @@
         .sidebar nav ul li a:hover {
             border-left-color: #fff;
             transform: translateX(5px);
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
         }
 
         .profile-pic {
             width: 150px;
             height: 150px;
-            border-radius: 0;
+            border-radius: 50%;
             margin: 0 auto 1.5rem;
             display: block;
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            border: none;
             object-fit: cover;
         }
 
@@ -106,15 +107,15 @@
 
         .main-content {
             padding: 2.5rem;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
         }
 
         .post {
             margin-bottom: 3rem;
             padding-bottom: 2rem;
-            border-bottom: 2px solid #f0f0f0;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
         }
 
         .post:last-child {
@@ -122,34 +123,41 @@
         }
 
         .post h2 {
-            color: #000;
+            color: #fff;
             margin-bottom: 0.5rem;
             font-size: 1.8rem;
         }
 
         .post-meta {
-            color: #888;
+            color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
 
         .post-intro {
             font-style: italic;
-            color: #666;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 1.5rem;
             padding-left: 1rem;
-            border-left: 3px solid rgba(0, 0, 0, 0.8);
+            border-left: 3px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .post p {
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .tag {
             display: inline-block;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: white;
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.85rem;
             margin-right: 0.5rem;
             margin-bottom: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .mobile-menu-toggle {
