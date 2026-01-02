@@ -138,11 +138,52 @@
                         0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
+        /* Profile container styling */
+        .profile-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Music bubble styling */
+        .music-bubble {
+            background: rgba(80, 80, 80, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.6rem 1rem;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .music-icon {
+            font-size: 1.1rem;
+        }
+
+        /* Bubble tail/pointer */
+        .bubble-tail {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid rgba(80, 80, 80, 0.95);
+            margin-bottom: 0.3rem;
+            position: relative;
+            z-index: 1;
+        }
+
         .profile-pic {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            margin: 0 auto 1.5rem;
             display: block;
             border: none;
             object-fit: cover;
@@ -292,6 +333,12 @@
                 display: none;
             }
 
+            /* Hide music bubble on mobile */
+            .music-bubble,
+            .bubble-tail {
+                display: none;
+            }
+
             .mobile-left {
                 display: flex;
                 align-items: center;
@@ -409,8 +456,17 @@
                         <span>Lofi Hip Hop</span>
                     </div>
                     <div class="bubble-tail"></div>
-                    <img src="images/profile.jpeg" alt="Profile" class="profile-pic">
+                    <img src="images/profile.jpeg" alt="Profile" class="profile-pic desktop-pic">
                 </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
             </aside>
 
             <main class="main-content">
