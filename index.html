@@ -16,6 +16,12 @@
             line-height: 1.6;
             color: #333;
             background: url('images/background.jpg') center/cover no-repeat fixed;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+
+        html {
+            height: -webkit-fill-available;
         }
 
         .container {
@@ -40,6 +46,7 @@
             position: relative;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
                         box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            min-height: calc(100vh - 4rem);
         }
 
         @media (max-width: 768px) {
@@ -352,6 +359,14 @@
         @media (max-width: 768px) {
             .content-wrapper {
                 grid-template-columns: 1fr;
+                min-height: calc(100vh - 2rem);
+                border-radius: 20px;
+            }
+
+            .container {
+                padding: 1rem;
+                min-height: 100vh;
+                min-height: -webkit-fill-available;
             }
 
             .sidebar {
