@@ -53,8 +53,7 @@
             -webkit-backdrop-filter: blur(30px);
             border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: 28px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             display: grid;
             grid-template-columns: 250px 1fr;
             overflow: hidden;
@@ -64,15 +63,26 @@
         .content-wrapper::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.5) 20%, 
-                rgba(255, 255, 255, 0.5) 80%, 
-                transparent);
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 28px;
+            padding: 2px;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .content-wrapper:hover::before {
+            opacity: 1;
         }
 
         .sidebar {
@@ -386,6 +396,96 @@
             nav.classList.toggle('open');
             icon.classList.toggle('open');
         }
+
+        // Dynamic edge highlight based on mouse position
+        const contentWrapper = document.querySelector('.content-wrapper');
+        
+        contentWrapper.addEventListener('mousemove', (e) => {
+            const rect = contentWrapper.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const angleX = (x - centerX) / centerX;
+            const angleY = (y - centerY) / centerY;
+            
+            const angle = Math.atan2(angleY, angleX) * (180 / Math.PI);
+            
+            contentWrapper.style.setProperty('--mouse-angle', `${angle}deg`);
+        });
+
+        // Load and display blog posts from markdown files
+        const blogPosts = [
+            { file: 'posts/welcome.md', isWelcome: true },
+            { file: 'posts/first-post.md' },
+            { file: 'posts/second-post.md' },
+            { file: 'posts/third-post.md' }
+        ];
+
+        async function loadBlogPosts() {
+            const mainContent = document.querySelector('.main-content');
+            
+            // Try to load posts from markdown files
+            let postsLoaded = false;
+            
+            for (const post of blogPosts) {
+                try {
+                    const response = await fetch(post.file);
+                    if (response.ok) {
+                        const markdown = await response.text();
+                        const htmlContent = parseMarkdown(markdown);
+                        
+                        if (!post.isWelcome) {
+                            const article = document.createElement('article');
+                            article.className = 'post';
+                            article.innerHTML = htmlContent;
+                            mainContent.appendChild(article);
+                            postsLoaded = true;
+                        }
+                    }
+                } catch (error) {
+                    // If markdown files don't exist, keep the default HTML posts
+                    console.log('Using default HTML posts');
+                    break;
+                }
+            }
+        }
+
+        // Simple markdown parser (basic implementation)
+        function parseMarkdown(markdown) {
+            let html = markdown;
+            
+            // Parse headers
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h2>$1</h2>');
+            
+            // Parse metadata (date and tags)
+            html = html.replace(/^date: (.*)$/gim, '<div class="post-meta">Posted on $1</div>');
+            html = html.replace(/^tags: (.*)$/gim, (match, tags) => {
+                const tagArray = tags.split(',').map(t => t.trim());
+                return tagArray.map(tag => `<span class="tag">${tag}</span>`).join('');
+            });
+            
+            // Parse bold and italic
+            html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            
+            // Parse paragraphs
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = '<p>' + html + '</p>';
+            
+            // Clean up empty paragraphs
+            html = html.replace(/<p><\/p>/g, '');
+            
+            return html;
+        }
+
+        // Load posts when page loads
+        window.addEventListener('DOMContentLoaded', loadBlogPosts);
     </script>
 </body>
 </html>
