@@ -1,6 +1,6 @@
-# My First Blog Post\
-date: January 2, 2026\
-tags: Personal, Life\
+# My First Blog Post
+date: January 2, 2026
+tags: Personal, Life
 \
 This is the content of my first blog post. I can write **bold text** and *italic text*.\
 \
