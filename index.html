@@ -565,21 +565,35 @@
         function parseMarkdown(markdown) {
             let html = markdown;
             
+            // Parse headers
             html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
             html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
             html = html.replace(/^# (.*$)/gim, '<h2>$1</h2>');
+            
+            // Parse metadata
             html = html.replace(/^date: (.*)$/gim, '<div class="post-meta">Posted on $1</div>');
             html = html.replace(/^tags: (.*)$/gim, (match, tags) => {
                 const tagArray = tags.split(',').map(t => t.trim());
                 return tagArray.map(tag => `<span class="tag">${tag}</span>`).join('');
             });
             
+            // Parse text formatting
             html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
             html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
-            html = html.replace(/\n\n/g, '</p><p>');
-            html = '<p>' + html + '</p>';
-            html = html.replace(/<p><\/p>/g, '');
+            
+            // Split into lines and wrap non-empty lines in paragraphs
+            const lines = html.split('\n');
+            const processedLines = lines.map(line => {
+                line = line.trim();
+                // Don't wrap if it's already an HTML tag or empty
+                if (!line || line.startsWith('<')) {
+                    return line;
+                }
+                return `<p>${line}</p>`;
+            });
+            
+            html = processedLines.join('\n');
             
             return html;
         }
