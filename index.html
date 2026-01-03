@@ -488,9 +488,9 @@
                     <img src="images/profile.jpeg" alt="Profile" class="profile-pic desktop-pic">
                 </div>
                 <div class="sidebar-info">
-                    <h2 class="sidebar-title">Welcome to my Corner of the Web</h2>
+                    <h2 class="sidebar-title">Welcome to My Corner of the Web</h2>
                     <div class="sidebar-meta">Posted on January 1, 2026</div>
-                    <div class="post-intro">
+                    <div class="sidebar-name">
                         <p><strong>Darby</strong> \DAR-bee\</p>
                     </div>
                     <p class="sidebar-description">Starting this webpage at 27 as a documentation of things I have done in my life.</p>
@@ -498,15 +498,7 @@
             </aside>
 
             <main class="main-content">
-                <article class="post">
-                    <h2>Welcome to My Corner of the Web</h2>
-                    <div class="post-meta">Posted on January 1, 2026</div>
-                    <div class="post-intro">
-                        <p><strong>Darby</strong> \DAR-bee\</p>
-                    </div>
-                    
-                    <p>Starting this webpage at 27 as a documentation of things I have done in my life.</p>
-                </article>
+                <!-- Blog posts will be loaded from markdown files -->
             </main>
         </div>
     </div>
@@ -543,7 +535,7 @@
 
         // Load blog posts from markdown files
         const blogPosts = [
-            { file: 'posts/welcome.md', isWelcome: true },
+            { file: 'posts/welcome.md' },
             { file: 'posts/first-post.md' },
             { file: 'posts/second-post.md' },
             { file: 'posts/third-post.md' }
@@ -559,16 +551,13 @@
                         const markdown = await response.text();
                         const htmlContent = parseMarkdown(markdown);
                         
-                        if (!post.isWelcome) {
-                            const article = document.createElement('article');
-                            article.className = 'post';
-                            article.innerHTML = htmlContent;
-                            mainContent.appendChild(article);
-                        }
+                        const article = document.createElement('article');
+                        article.className = 'post';
+                        article.innerHTML = htmlContent;
+                        mainContent.appendChild(article);
                     }
                 } catch (error) {
-                    console.log('Using default HTML posts');
-                    break;
+                    console.log('Could not load post:', post.file);
                 }
             }
         }
