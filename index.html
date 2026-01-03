@@ -1071,18 +1071,24 @@
             html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
             
-            // Split into lines and wrap non-empty lines in paragraphs
-            const lines = html.split('\n');
-            const processedLines = lines.map(line => {
-                line = line.trim();
-                // Don't wrap if it's already an HTML tag or empty
-                if (!line || line.startsWith('<')) {
-                    return line;
+            // Split by double newlines to get paragraphs
+            const paragraphs = html.split(/\n\n+/);
+            const processedParagraphs = paragraphs.map(para => {
+                para = para.trim();
+                if (!para) return '';
+                
+                // Don't wrap if it's already an HTML tag
+                if (para.startsWith('<h') || para.startsWith('<div') || para.startsWith('<span')) {
+                    return para;
                 }
-                return `<p>${line}</p>`;
+                
+                // Replace single newlines within paragraphs with spaces
+                para = para.replace(/\n/g, ' ');
+                
+                return `<p>${para}</p>`;
             });
             
-            html = processedLines.join('\n');
+            html = processedParagraphs.filter(p => p).join('\n');
             
             return html;
         }
