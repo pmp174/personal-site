@@ -190,6 +190,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 2.5rem;
         }
 
         /* Music bubble styling */
@@ -398,6 +399,7 @@
                 align-items: center;
                 justify-content: space-between;
                 margin-bottom: 1rem;
+                padding-top: 2.5rem;
             }
 
             .desktop-pic {
@@ -485,7 +487,144 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
-            padding: 0.5rem;
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            padding: 0 2rem;
+        }
+
+        /* macOS Stoplight Buttons - Social Links */
+        .stoplight-buttons {
+            position: absolute;
+            top: 1.25rem;
+            left: 1.25rem;
+            display: flex;
+            gap: 0.6rem;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .stoplight-buttons {
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                gap: 0.5rem;
+                z-index: 1001;
+            }
+        }
+
+        .stoplight-btn {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4),
+                        0 2px 6px rgba(0, 0, 0, 0.25);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+        }
+
+        .stoplight-btn::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+        }
+
+        .stoplight-btn:hover {
+            transform: scale(1.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.15) 100%);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.5),
+                        0 4px 12px rgba(0, 0, 0, 0.3),
+                        0 0 12px rgba(255, 255, 255, 0.2);
+        }
+
+        .stoplight-btn:hover::before {
+            opacity: 0;
+        }
+
+        .stoplight-btn:active {
+            transform: scale(1.2);
+        }
+
+        /* Platform Icons */
+        .stoplight-btn svg {
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: rgba(255, 255, 255, 0.95);
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+        }
+
+        .stoplight-btn:hover svg {
+            opacity: 1;
+        }
+
+        /* Tooltip for social buttons */
+        .stoplight-btn .tooltip {
+            position: absolute;
+            top: calc(100% + 0.6rem);
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.4rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .stoplight-btn:hover .tooltip {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .stoplight-buttons {
+                top: 1rem;
+                left: 1rem;
+                gap: 0.5rem;
+            }
+
+            .stoplight-btn {
+                width: 14px;
+                height: 14px;
+            }
+
+            .stoplight-btn svg {
+                width: 8px;
+                height: 8px;
+            }
+
+            .stoplight-btn .tooltip {
+                display: none;
+            }
         }
 
         .dock {
@@ -578,10 +717,7 @@
         @media (max-width: 768px) {
             .dock-container {
                 bottom: 0.5rem;
-                left: 0;
-                right: 0;
-                transform: none;
-                padding: 0 0.5rem;
+                padding: 0 1rem;
             }
 
             .dock {
@@ -612,6 +748,42 @@
     
     <div class="container">
         <div class="content-wrapper">
+            <!-- macOS Stoplight Social Buttons -->
+            <div class="stoplight-buttons">
+                <a href="https://www.youtube.com/@your-channel" target="_blank" rel="noopener noreferrer" class="stoplight-btn">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M23 9.71a8.5 8.5 0 00-.91-4.13 2.92 2.92 0 00-1.72-1A78.36 78.36 0 0012 4.27a78.45 78.45 0 00-8.34.3 2.87 2.87 0 00-1.46.74c-.9.83-1 2.25-1.1 3.45a48.29 48.29 0 000 6.48 9.55 9.55 0 00.3 2 3.14 3.14 0 00.71 1.36 2.86 2.86 0 001.49.78 45.18 45.18 0 006.5.33c3.5.05 6.57 0 10.2-.28a2.88 2.88 0 001.53-.78 2.49 2.49 0 00.61-1 10.58 10.58 0 00.52-3.4c.04-.56.04-3.94.04-4.54zM9.74 14.85V8.66l5.92 3.11c-1.66.92-3.85 1.96-5.92 3.08z" fill="currentColor"/>
+                    </svg>
+                    <span class="tooltip">YouTube</span>
+                </a>
+                <a href="https://bsky.app/profile/your-handle.bsky.social" target="_blank" rel="noopener noreferrer" class="stoplight-btn">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 01-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z" fill="currentColor"/>
+                    </svg>
+                    <span class="tooltip">Bluesky</span>
+                </a>
+                <a href="https://digg.com/@your-username" target="_blank" rel="noopener noreferrer" class="stoplight-btn">
+                    <svg viewBox="0 0 32 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- d -->
+                        <rect x="1" y="1" width="5" height="14" fill="currentColor"/>
+                        <rect x="6" y="1" width="2" height="3" fill="currentColor"/>
+                        <rect x="6" y="6" width="2" height="9" fill="currentColor"/>
+                        <!-- i -->
+                        <rect x="10" y="1" width="2" height="3" fill="currentColor"/>
+                        <rect x="10" y="6" width="2" height="9" fill="currentColor"/>
+                        <!-- g -->
+                        <rect x="14" y="1" width="5" height="14" fill="currentColor"/>
+                        <rect x="19" y="1" width="2" height="3" fill="currentColor"/>
+                        <rect x="19" y="6" width="2" height="9" fill="currentColor"/>
+                        <!-- g -->
+                        <rect x="23" y="1" width="5" height="14" fill="currentColor"/>
+                        <rect x="28" y="1" width="2" height="3" fill="currentColor"/>
+                        <rect x="28" y="6" width="2" height="9" fill="currentColor"/>
+                    </svg>
+                    <span class="tooltip">Digg</span>
+                </a>
+            </div>
+
             <aside class="sidebar">
                 <div class="mobile-header">
                     <div class="mobile-left">
@@ -653,15 +825,15 @@
                 <div class="dock-icon">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <defs>
-                            <linearGradient id="homeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#60A5FA;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+                            <linearGradient id="glassGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
                             </linearGradient>
                         </defs>
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#homeGradient)"/>
-                        <circle cx="9" cy="10.5" r="1.3" fill="white" opacity="0.95"/>
-                        <circle cx="15" cy="10.5" r="1.3" fill="white" opacity="0.95"/>
-                        <path d="M8.5 14C8.5 14 10 15.5 12 15.5C14 15.5 15.5 14 15.5 14" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.95"/>
+                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                        <circle cx="9" cy="10.5" r="1.3" fill="white" opacity="0.9"/>
+                        <circle cx="15" cy="10.5" r="1.3" fill="white" opacity="0.9"/>
+                        <path d="M8.5 14C8.5 14 10 15.5 12 15.5C14 15.5 15.5 14 15.5 14" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
                     </svg>
                 </div>
                 <span class="dock-label">Home</span>
@@ -669,15 +841,9 @@
             <a href="#gallery" class="dock-item">
                 <div class="dock-icon">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="galleryGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#F472B6;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#galleryGradient)"/>
-                        <circle cx="9" cy="9" r="1.8" fill="white" opacity="0.9"/>
-                        <path d="M4 16L9 11L13 15L16 12L20 16V17C20 18.1046 19.1046 19 18 19H6C4.89543 19 4 18.1046 4 17V16Z" fill="white" opacity="0.85"/>
+                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                        <circle cx="9" cy="9" r="1.8" fill="white" opacity="0.85"/>
+                        <path d="M4 16L9 11L13 15L16 12L20 16V17C20 18.1046 19.1046 19 18 19H6C4.89543 19 4 18.1046 4 17V16Z" fill="white" opacity="0.8"/>
                     </svg>
                 </div>
                 <span class="dock-label">Gallery</span>
@@ -685,16 +851,10 @@
             <a href="#music" class="dock-item">
                 <div class="dock-icon">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="musicGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#FB923C;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#F97316;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#musicGradient)"/>
-                        <path d="M10 16V9L17 7.5V14.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.95"/>
-                        <circle cx="8" cy="16" r="2" fill="white" opacity="0.9"/>
-                        <circle cx="15" cy="14.5" r="2" fill="white" opacity="0.9"/>
+                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                        <path d="M10 16V9L17 7.5V14.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+                        <circle cx="8" cy="16" r="2" fill="white" opacity="0.85"/>
+                        <circle cx="15" cy="14.5" r="2" fill="white" opacity="0.85"/>
                     </svg>
                 </div>
                 <span class="dock-label">Music</span>
@@ -702,15 +862,11 @@
             <a href="#projects" class="dock-item">
                 <div class="dock-icon">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="projectsGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:#A78BFA;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#projectsGradient)"/>
-                        <rect x="7" y="9" width="10" height="8" rx="1.5" fill="white" opacity="0.9"/>
-                        <path d="M10 9V7.5C10 7.22386 10.2239 7 10.5 7H13.5C13.7761 7 14 7.22386 14 7.5V9" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                        <!-- Folder tab -->
+                        <path d="M7 10V9C7 8.44772 7.44772 8 8 8H10.5L11.5 9H15C15.5523 9 16 9.44772 16 10V10" fill="white" opacity="0.85"/>
+                        <!-- Folder body -->
+                        <rect x="7" y="10" width="10" height="6" rx="1" fill="white" opacity="0.85"/>
                     </svg>
                 </div>
                 <span class="dock-label">Projects</span>
