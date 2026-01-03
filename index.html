@@ -532,6 +532,27 @@
             contentWrapper.style.setProperty('--mouse-y', `${yPercent}%`);
         });
 
+        // Load now playing music
+        async function loadNowPlaying() {
+            try {
+                const response = await fetch('now-playing.md');
+                if (response.ok) {
+                    const content = await response.text();
+                    // Extract the music name from the markdown (expected format: "music: Song Name")
+                    const musicMatch = content.match(/music:\s*(.+)/i);
+                    if (musicMatch) {
+                        const musicName = musicMatch[1].trim();
+                        // Update all music bubbles
+                        document.querySelectorAll('.music-bubble span:last-child').forEach(span => {
+                            span.textContent = musicName;
+                        });
+                    }
+                }
+            } catch (error) {
+                console.log('Could not load now-playing.md, using default');
+            }
+        }
+
         // Load blog posts from markdown files
         const blogPosts = [
             { file: 'posts/welcome.md' },
@@ -597,7 +618,11 @@
             return html;
         }
 
-        window.addEventListener('DOMContentLoaded', loadBlogPosts);
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            await loadNowPlaying();
+            await loadBlogPosts();
+        });
     </script>
 </body>
 </html>
