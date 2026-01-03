@@ -50,8 +50,9 @@
             grid-template-columns: 250px 1fr;
             overflow: hidden;
             position: relative;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                        box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), 
+                        box-shadow 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
         }
 
         @media (max-width: 768px) {
@@ -61,15 +62,17 @@
         }
 
         .content-wrapper:hover {
-            transform: scale(1.02);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
-                        0 8px 24px rgba(0, 0, 0, 0.3);
+            transform: scale(1.025);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                        0 12px 32px rgba(0, 0, 0, 0.35);
         }
 
         .content-wrapper.touch-active {
-            transform: scale(1.03);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25),
-                        0 12px 32px rgba(0, 0, 0, 0.35);
+            transform: scale(1.04);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                        0 16px 48px rgba(0, 0, 0, 0.4);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
+                        box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .content-wrapper::before {
@@ -77,15 +80,16 @@
             position: absolute;
             inset: -2px;
             background: radial-gradient(
-                circle 1000px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(255, 255, 255, 0.06),
+                circle 1200px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.08),
                 transparent 50%
             );
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             pointer-events: none;
             border-radius: 28px;
-            filter: blur(60px);
+            filter: blur(80px);
+            will-change: opacity;
         }
 
         .content-wrapper:hover::before {
@@ -528,41 +532,59 @@
             }
         }
 
-        // Mouse tracking for edge highlight effect
+        // Mouse tracking for edge highlight effect - smooth and fluid
         const contentWrapper = document.querySelector('.content-wrapper');
+        let mouseFrame = null;
         
         contentWrapper.addEventListener('mousemove', (e) => {
-            const rect = contentWrapper.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            if (mouseFrame) {
+                cancelAnimationFrame(mouseFrame);
+            }
             
-            const xPercent = (x / rect.width) * 100;
-            const yPercent = (y / rect.height) * 100;
-            
-            contentWrapper.style.setProperty('--mouse-x', `${xPercent}%`);
-            contentWrapper.style.setProperty('--mouse-y', `${yPercent}%`);
+            mouseFrame = requestAnimationFrame(() => {
+                const rect = contentWrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xPercent = (x / rect.width) * 100;
+                const yPercent = (y / rect.height) * 100;
+                
+                contentWrapper.style.setProperty('--mouse-x', `${xPercent}%`);
+                contentWrapper.style.setProperty('--mouse-y', `${yPercent}%`);
+            });
         });
 
-        // Touch tracking for mobile devices
+        // Touch tracking for mobile devices - smooth liquid glass feel
         let touchActive = false;
+        let animationFrame = null;
         
         contentWrapper.addEventListener('touchstart', (e) => {
             touchActive = true;
             contentWrapper.classList.add('touch-active');
             updateTouchPosition(e);
-        });
+        }, { passive: true });
         
         contentWrapper.addEventListener('touchmove', (e) => {
             if (touchActive) {
-                updateTouchPosition(e);
+                // Use requestAnimationFrame for buttery smooth updates
+                if (animationFrame) {
+                    cancelAnimationFrame(animationFrame);
+                }
+                animationFrame = requestAnimationFrame(() => {
+                    updateTouchPosition(e);
+                });
             }
-        });
+        }, { passive: true });
         
         contentWrapper.addEventListener('touchend', () => {
             touchActive = false;
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+            // Longer delay for that liquid glass settling effect
             setTimeout(() => {
                 contentWrapper.classList.remove('touch-active');
-            }, 500);
+            }, 800);
         });
         
         function updateTouchPosition(e) {
