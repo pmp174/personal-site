@@ -8,9 +8,13 @@ Between October of 2024 and March of 2025 I was submitted to a series of events 
 
 In November of 2024 I witnessed the death of my country. I saw the only stateswoman this country could ever know lose to a wannabe tyrant. That set the tone for an era of hopelessness. Hopelessness about that day. Hopelessness about the weeks ahead. And for a moment wishing and hoping that I was in some kind of nightmare that would end. 
 
-A week later my friend's brother died and I chose to delay my grieving to be strong for her. Looking back at that time, ther had to be a better way for me to have grieved. Compartmentalization was a huge mistake. In a way however the comapny our friend group offered eachother at that time also helped me. Unfortuantly I was in a mental state where going to a funeral was better than isolating myself. And even though I wish the circumanstances had been different, I do not regret spending time with her. Even if I chose to compartmentalize my own issues.
+A week later my friend's brother died and I chose to delay my grieving to be strong for her. Looking back at that time, ther had to be a better way for me to have grieved. Compartmentalization was a huge mistake. In a way however the comapny our friend group offered eachother at that time also helped me. Unfortuantly I was in a mental state where going to a funeral was better than isolating myself. And even though I wish the circumanstances had been different, I do not regret spending time with her. Even if I chose to compartmentalize my own issues. 
 
-2 weeks after that I broke up with my ex boyfriend. I know thomas was trying his best. I know he was working around his limitations. Unfortantly I wanted a lot more. I had lost really a best friend. I did emphantilize and baby him a lot. But it wasn't out of a need to patronize him. I just had such a love for him that I was 
+The week of thankagiving I broke up with my ex boyfriend. I know Thomas was trying his best. I know he was working around his limitations. Unfortantly I wanted a lot more. I had lost really a best friend. I did emphantilize and baby him a lot. But it wasn't out of a need to patronize him. I just had such a love for him that I was infatuated. I really hope the best for him and i hope he and his family the best. He is also an excellent actor. I wish him all the love in the world. 
+
+4 months later in march of 2025 I was in a hospital room with my mother, my aunt, my cousins elton and angelina, her father chris, and my cousin albert who had passed away that morning. It was a surreal experience. I saw myself sitting on the floor and having a panic attack while everyone else was in the room grieving. My aunt in tremendous pain somehow kept her cool. I continued to compartmentalize my grieving. Replacing my pain with tv shows like ugly betty, jake 2.0, covert affairs, and pushing daisys.
+
+
 
 Now all of those memories of that bitter end to 2024 come back to me as oscillations. Repeating themselves and coming back. Every day I see a different angle of thse things.  
 
