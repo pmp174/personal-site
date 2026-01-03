@@ -305,6 +305,51 @@
         .post p {
             color: rgba(255, 255, 255, 1);
             line-height: 1.8;
+            margin-bottom: 1.2rem;
+        }
+
+        .post p:last-child {
+            margin-bottom: 0;
+        }
+
+        .read-more-btn {
+            margin-top: 1.5rem;
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                        0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .read-more-btn:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
+            transform: translateY(-2px);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                        0 4px 12px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .read-more-btn:active {
+            transform: translateY(0);
+        }
+
+        .post-full-content {
+            margin-top: 1rem;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
         }
 
         .post-preview {
@@ -1042,8 +1087,63 @@
                         
                         const article = document.createElement('article');
                         article.className = 'post';
-                        article.innerHTML = htmlContent;
+                        
+                        // Create a temporary container to parse the HTML
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = htmlContent;
+                        
+                        // Extract title, meta, tags, and paragraphs
+                        const title = tempDiv.querySelector('h2');
+                        const meta = tempDiv.querySelector('.post-meta');
+                        const tags = tempDiv.querySelectorAll('.tag');
+                        const paragraphs = tempDiv.querySelectorAll('p');
+                        
+                        // Build the preview (title + meta + tags + first 2 paragraphs)
+                        let previewContent = '';
+                        if (title) previewContent += title.outerHTML;
+                        if (meta) previewContent += meta.outerHTML;
+                        if (tags.length > 0) {
+                            previewContent += '<div class="post-tags">';
+                            tags.forEach(tag => previewContent += tag.outerHTML);
+                            previewContent += '</div>';
+                        }
+                        
+                        // Add first 2 paragraphs to preview
+                        const previewParas = Array.from(paragraphs).slice(0, 2);
+                        previewParas.forEach(p => previewContent += p.outerHTML);
+                        
+                        // Build the full content (everything after preview)
+                        const fullParas = Array.from(paragraphs).slice(2);
+                        let fullContent = '';
+                        fullParas.forEach(p => fullContent += p.outerHTML);
+                        
+                        // Create the collapsible structure
+                        article.innerHTML = `
+                            <div class="post-preview-content">
+                                ${previewContent}
+                            </div>
+                            <div class="post-full-content" style="display: none;">
+                                ${fullContent}
+                            </div>
+                            ${fullParas.length > 0 ? '<button class="read-more-btn">Read More</button>' : ''}
+                        `;
+                        
                         mainContent.appendChild(article);
+                        
+                        // Add click handler for Read More button
+                        const readMoreBtn = article.querySelector('.read-more-btn');
+                        if (readMoreBtn) {
+                            readMoreBtn.addEventListener('click', function() {
+                                const fullContentDiv = article.querySelector('.post-full-content');
+                                if (fullContentDiv.style.display === 'none') {
+                                    fullContentDiv.style.display = 'block';
+                                    this.textContent = 'Read Less';
+                                } else {
+                                    fullContentDiv.style.display = 'none';
+                                    this.textContent = 'Read More';
+                                }
+                            });
+                        }
                     }
                 } catch (error) {
                     console.log('Could not load post:', post.file);
