@@ -105,6 +105,3 @@ Images in each folder should be numbered:
 - Don't forget commas between items
 - No comma after the last item
 - Use a JSON validator if you get errors
-
-Before: Edit HTML code ❌  
-Now: Edit simple gallery/gallery.json file ✅
