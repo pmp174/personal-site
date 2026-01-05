@@ -2,15 +2,15 @@
 
 ## 📁 How the Gallery Works
 
-The gallery reads project folders from **`gallery.json`** - a simple configuration file!
+The gallery reads project folders from **`gallery/gallery.json`** - a simple configuration file inside your gallery folder!
 
 ## 🎨 Folder Structure
 
 ```
 your-website/
 ├── gallery.html
-├── gallery.json        ← Edit this file to add projects!
 └── gallery/
+    ├── gallery.json    ← Edit this file to add projects!
     ├── Union Latina-União Latina/
     │   ├── 1.jpg
     │   ├── 2.jpg
@@ -23,9 +23,9 @@ your-website/
         └── 2.jpg
 ```
 
-## ✏️ Adding Projects - Edit `gallery.json`
+## ✏️ Adding Projects - Edit `gallery/gallery.json`
 
-Open **`gallery.json`** and add folder names to the array:
+Open **`gallery/gallery.json`** and add folder names to the array:
 
 ```json
 {
@@ -46,6 +46,7 @@ Open **`gallery.json`** and add folder names to the array:
 - **Comma after each item** (except the last one)
 - Folder names must match exactly (case-sensitive)
 - Must be valid JSON syntax
+- File must be at `gallery/gallery.json`
 
 ## 🖼️ Image Naming
 
@@ -58,10 +59,10 @@ Images in each folder should be numbered:
 
 1. **Create folder**: `/gallery/my-project/`
 2. **Add images**: `1.jpg`, `2.jpg`, `3.jpg`
-3. **Edit gallery.json**: Add `"my-project"` to the array
+3. **Edit gallery/gallery.json**: Add `"my-project"` to the array
 4. **Refresh page** - Done! ✨
 
-## 💡 Example `gallery.json`
+## 💡 Example `gallery/gallery.json`
 
 ```json
 {
@@ -78,7 +79,7 @@ Images in each folder should be numbered:
 
 ## ✨ Features
 
-- **No HTML editing** - just edit gallery.json
+- **No HTML editing** - just edit gallery/gallery.json
 - **Simple JSON file** - easy to manage
 - **Automatic loading** - gallery reads the file on page load
 - **Beautiful cards** - first image becomes the cover
@@ -88,7 +89,7 @@ Images in each folder should be numbered:
 ## 🔧 Troubleshooting
 
 **Projects not showing?**
-- Make sure `gallery.json` is in the same directory as `gallery.html`
+- Make sure `gallery.json` is inside the `gallery/` folder
 - Check that JSON syntax is valid (use a JSON validator)
 - Folder names must match exactly (case-sensitive)
 - Make sure folders contain numbered images (1.jpg, 2.jpg, etc.)
@@ -106,4 +107,4 @@ Images in each folder should be numbered:
 - Use a JSON validator if you get errors
 
 Before: Edit HTML code ❌  
-Now: Edit simple gallery.json file ✅
+Now: Edit simple gallery/gallery.json file ✅
