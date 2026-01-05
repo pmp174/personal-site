@@ -639,8 +639,8 @@
     </div>
 
     <script>
-        // Gallery automatically reads project folders from gallery.json
-        // Edit gallery.json to add/remove projects - no need to edit this HTML!
+        // Gallery automatically reads project folders from gallery/gallery.json
+        // Edit gallery/gallery.json to add/remove projects - no need to edit this HTML!
         
         let currentProject = null;
         let currentPhotoIndex = 0;
@@ -652,19 +652,19 @@
             loadProjects();
         });
 
-        // Load project list from gallery.json
+        // Load project list from gallery/gallery.json
         async function loadProjectsFromFile() {
             try {
-                const response = await fetch('gallery.json');
+                const response = await fetch('gallery/gallery.json');
                 if (!response.ok) {
-                    throw new Error('Could not load gallery.json');
+                    throw new Error('Could not load gallery/gallery.json');
                 }
                 const data = await response.json();
                 YOUR_PROJECTS = data.projects || [];
                 console.log('Loaded projects:', YOUR_PROJECTS);
             } catch (error) {
-                console.error('Error loading gallery.json:', error);
-                console.log('Make sure gallery.json exists in the same directory as gallery.html');
+                console.error('Error loading gallery/gallery.json:', error);
+                console.log('Make sure gallery.json exists in the gallery/ directory');
                 // Fallback to empty array if file doesn't exist
                 YOUR_PROJECTS = [];
             }
@@ -679,7 +679,7 @@
                     <div style="grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: rgba(255,255,255,0.7);">
                         <div style="font-size: 4rem; margin-bottom: 1rem;">📁</div>
                         <h2 style="font-size: 2rem; margin-bottom: 1rem; color: white;">No Projects Found</h2>
-                        <p style="font-size: 1.2rem;">Add your folder names to gallery.md</p>
+                        <p style="font-size: 1.2rem;">Add your folder names to gallery/gallery.json</p>
                     </div>
                 `;
                 return;
