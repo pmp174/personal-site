@@ -35,6 +35,39 @@
             border-radius: 28px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: radial-gradient(
+                circle 1200px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                rgba(255, 255, 255, 0.08),
+                transparent 50%
+            );
+            opacity: 0;
+            transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            pointer-events: none;
+            border-radius: 28px;
+            filter: blur(80px);
+            will-change: opacity;
+        }
+
+        .content-wrapper:hover::before {
+            opacity: 1;
+        }
+
+        .content-wrapper.touch-active {
+            transform: scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .content-wrapper.touch-active::before {
+            opacity: 1;
         }
 
         .content-wrapper:hover {
@@ -92,12 +125,12 @@
             inset: 0;
             background-size: cover;
             background-position: center;
-            opacity: 0.5;
+            opacity: 0.8;
             transition: all 0.3s ease;
         }
 
         .project-card:hover .project-card-bg {
-            opacity: 0.7;
+            opacity: 1;
             transform: scale(1.05);
         }
 
@@ -109,7 +142,7 @@
             flex-direction: column;
             justify-content: flex-end;
             padding: 2rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
         }
 
         .project-card-title {
@@ -731,15 +764,10 @@
                 const cardContent = document.createElement('div');
                 cardContent.className = 'project-card-content';
                 
-                const cardIcon = document.createElement('div');
-                cardIcon.className = 'project-card-icon';
-                cardIcon.textContent = '📁';
-                
                 const cardTitle = document.createElement('div');
                 cardTitle.className = 'project-card-title';
                 cardTitle.textContent = folderName;
                 
-                cardContent.appendChild(cardIcon);
                 cardContent.appendChild(cardTitle);
                 card.appendChild(cardBg);
                 card.appendChild(cardContent);
@@ -873,6 +901,72 @@
 
         document.getElementById('lightbox').addEventListener('click', (e) => {
             if (e.target.id === 'lightbox') closeLightbox();
+        });
+
+        // Mouse tracking for edge highlight effect - smooth and fluid
+        const contentWrapper = document.querySelector('.content-wrapper');
+        let mouseFrame = null;
+        
+        contentWrapper.addEventListener('mousemove', (e) => {
+            if (mouseFrame) {
+                cancelAnimationFrame(mouseFrame);
+            }
+            
+            mouseFrame = requestAnimationFrame(() => {
+                const rect = contentWrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xPercent = (x / rect.width) * 100;
+                const yPercent = (y / rect.height) * 100;
+                
+                contentWrapper.style.setProperty('--mouse-x', `${xPercent}%`);
+                contentWrapper.style.setProperty('--mouse-y', `${yPercent}%`);
+            });
+        });
+
+        // Touch tracking for mobile devices
+        let touchActive = false;
+        let animationFrame = null;
+        
+        function updateTouchPosition(e) {
+            const rect = contentWrapper.getBoundingClientRect();
+            const touch = e.touches[0];
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+            
+            const xPercent = (x / rect.width) * 100;
+            const yPercent = (y / rect.height) * 100;
+            
+            contentWrapper.style.setProperty('--mouse-x', `${xPercent}%`);
+            contentWrapper.style.setProperty('--mouse-y', `${yPercent}%`);
+        }
+        
+        contentWrapper.addEventListener('touchstart', (e) => {
+            touchActive = true;
+            contentWrapper.classList.add('touch-active');
+            updateTouchPosition(e);
+        }, { passive: true });
+        
+        contentWrapper.addEventListener('touchmove', (e) => {
+            if (touchActive) {
+                if (animationFrame) {
+                    cancelAnimationFrame(animationFrame);
+                }
+                animationFrame = requestAnimationFrame(() => {
+                    updateTouchPosition(e);
+                });
+            }
+        }, { passive: true });
+        
+        contentWrapper.addEventListener('touchend', () => {
+            touchActive = false;
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+            setTimeout(() => {
+                contentWrapper.classList.remove('touch-active');
+            }, 300);
         });
     </script>
 </body>
