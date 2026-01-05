@@ -639,169 +639,36 @@
     </div>
 
     <script>
-        // ===== AUTOMATIC GALLERY DETECTION =====
-        // No configuration needed! Just add folders to /gallery/
-        // The system will automatically detect and display them
+        // Gallery automatically reads project folders from gallery.md
+        // Edit gallery.md to add/remove projects - no need to edit this HTML!
         
         let currentProject = null;
         let currentPhotoIndex = 0;
         let currentPhotos = [];
-        let detectedProjects = [];
+        let YOUR_PROJECTS = [];
 
-        window.addEventListener('DOMContentLoaded', () => {
-            autoDetectProjects();
+        window.addEventListener('DOMContentLoaded', async () => {
+            await loadProjectsFromFile();
+            loadProjects();
         });
 
-        // Automatically detect all project folders
-        async function autoDetectProjects() {
-            // List of potential project folders to check
-            // The system will try to load these and auto-detect which ones exist
-            const potentialFolders = [
-                'latin-american-art',
-                'photography',
-                'digital-art',
-                'paintings',
-                'drawings',
-                'sculptures',
-                'installations',
-                'mixed-media',
-                'portraits',
-                'landscapes',
-                'abstract',
-                'street-photography',
-                'nature',
-                'architecture',
-                'black-and-white',
-                'color-work',
-                'experimental',
-                'commissions',
-                'personal-work',
-                'sketches',
-                'watercolors',
-                'oil-paintings',
-                'acrylics',
-                'charcoal',
-                'pen-and-ink',
-                'digital-illustrations',
-                'concept-art',
-                'character-design',
-                'environments',
-                'still-life',
-                'figurative',
-                'contemporary',
-                'traditional',
-                'modern',
-                'surreal',
-                'realism',
-                'impressionism',
-                'expressionism',
-                'minimalism',
-                'pop-art',
-                'urban',
-                'travel',
-                'documentary',
-                'editorial',
-                'fashion',
-                'product',
-                'food',
-                'wildlife',
-                'macro',
-                'aerial',
-                'panoramic',
-                'night-photography',
-                'long-exposure',
-                'studio',
-                'outdoor',
-                'indoor',
-                'events',
-                'weddings',
-                'family',
-                'pets',
-                'sports',
-                'action',
-                'candid',
-                'posed',
-                'artistic',
-                'commercial',
-                'fine-art',
-                '2024',
-                '2023',
-                '2022',
-                '2021',
-                '2020',
-                'recent-work',
-                'archive',
-                'favorites',
-                'best-of',
-                'portfolio',
-                'client-work',
-                'exhibition',
-                'series-1',
-                'series-2',
-                'series-3',
-                'project-a',
-                'project-b',
-                'project-c',
-                'collection-1',
-                'collection-2',
-                'untitled',
-                'misc',
-                'other'
-            ];
-
-            // Try to detect which folders actually exist by attempting to load an image
-            const projectPromises = potentialFolders.map(folder => {
-                return new Promise((resolve) => {
-                    const img = new Image();
-                    const testPath = `gallery/${folder}/1.jpg`;
-                    
-                    img.onload = () => {
-                        // Folder exists! Convert folder name to display name
-                        const displayName = folder
-                            .split('-')
-                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(' ');
-                        
-                        resolve({
-                            name: displayName,
-                            folder: folder,
-                            exists: true
-                        });
-                    };
-                    
-                    img.onerror = () => {
-                        resolve(null); // Folder doesn't exist
-                    };
-                    
-                    img.src = testPath;
-                    
-                    // Timeout after 2 seconds
-                    setTimeout(() => {
-                        resolve(null);
-                    }, 2000);
-                });
-            });
-
-            // Wait for all checks to complete
-            const results = await Promise.all(projectPromises);
-            detectedProjects = results.filter(p => p !== null);
-
-            // If no projects detected, show a helpful message
-            if (detectedProjects.length === 0) {
-                const grid = document.getElementById('projectsGrid');
-                grid.innerHTML = `
-                    <div style="grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: rgba(255,255,255,0.7);">
-                        <div style="font-size: 4rem; margin-bottom: 1rem;">📁</div>
-                        <h2 style="font-size: 2rem; margin-bottom: 1rem; color: white;">No Projects Found</h2>
-                        <p style="font-size: 1.2rem; line-height: 1.6;">
-                            To add projects, create folders in <code style="background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; border-radius: 4px;">/gallery/</code><br>
-                            For example: <code style="background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; border-radius: 4px;">/gallery/my-project/</code><br>
-                            Then add numbered images: <code style="background: rgba(0,0,0,0.3); padding: 0.2rem 0.5rem; border-radius: 4px;">1.jpg, 2.jpg, 3.jpg...</code>
-                        </p>
-                    </div>
-                `;
-            } else {
-                loadProjects();
+        // Load project list from gallery.md
+        async function loadProjectsFromFile() {
+            try {
+                const response = await fetch('gallery.md');
+                const text = await response.text();
+                
+                // Parse the markdown file
+                YOUR_PROJECTS = text
+                    .split('\n')
+                    .map(line => line.trim())
+                    .filter(line => line && !line.startsWith('#')) // Remove empty lines and comments
+                    .filter(line => line.length > 0);
+                
+                console.log('Loaded projects:', YOUR_PROJECTS);
+            } catch (error) {
+                console.error('Error loading gallery.md:', error);
+                console.log('Make sure gallery.md exists in the same directory as gallery.html');
             }
         }
 
@@ -809,22 +676,33 @@
             const grid = document.getElementById('projectsGrid');
             grid.innerHTML = '';
 
-            detectedProjects.forEach(project => {
+            if (YOUR_PROJECTS.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: rgba(255,255,255,0.7);">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">📁</div>
+                        <h2 style="font-size: 2rem; margin-bottom: 1rem; color: white;">No Projects Found</h2>
+                        <p style="font-size: 1.2rem;">Add your folder names to YOUR_PROJECTS list in gallery.html</p>
+                    </div>
+                `;
+                return;
+            }
+
+            YOUR_PROJECTS.forEach(folderName => {
                 const card = document.createElement('a');
                 card.className = 'project-card';
                 card.href = '#';
                 card.onclick = (e) => {
                     e.preventDefault();
-                    openProject(project);
+                    openProject({ name: folderName, folder: folderName });
                 };
 
-                const coverPath = `gallery/${project.folder}/1.jpg`;
+                const coverPath = `gallery/${folderName}/1.jpg`;
                 
                 card.innerHTML = `
                     <div class="project-card-bg" style="background-image: url('${coverPath}');"></div>
                     <div class="project-card-content">
                         <div class="project-card-icon">📁</div>
-                        <div class="project-card-title">${project.name}</div>
+                        <div class="project-card-title">${folderName}</div>
                     </div>
                 `;
 
@@ -842,35 +720,25 @@
 
         function loadPhotos(project) {
             const grid = document.getElementById('photosGrid');
-            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: rgba(255,255,255,0.7);">Loading images...</div>';
+            grid.innerHTML = '';
             currentPhotos = [];
 
-            const extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-            let loadedCount = 0;
-            let checkedCount = 0;
-            const totalChecks = 100 * extensions.length;
+            const extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'JPG', 'JPEG', 'PNG'];
             
             for (let i = 1; i <= 100; i++) {
                 extensions.forEach(ext => {
                     const imagePath = `gallery/${project.folder}/${i}.${ext}`;
                     const img = new Image();
-                    
                     img.onload = function() {
                         if (!currentPhotos.some(p => p.path === imagePath)) {
                             currentPhotos.push({
                                 path: imagePath,
                                 index: i
                             });
-                            loadedCount++;
-                            
-                            // Clear loading message on first image
-                            if (loadedCount === 1) {
-                                grid.innerHTML = '';
-                            }
                             
                             const photoItem = document.createElement('div');
                             photoItem.className = 'photo-item';
-                            photoItem.style.order = i; // Maintain number order
+                            photoItem.style.order = i;
                             photoItem.onclick = () => {
                                 const sortedPhotos = [...currentPhotos].sort((a, b) => a.index - b.index);
                                 const photoIndex = sortedPhotos.findIndex(p => p.path === imagePath);
@@ -884,28 +752,9 @@
                             photoItem.appendChild(photoImg);
                             grid.appendChild(photoItem);
                         }
-                        
-                        checkedCount++;
-                        checkComplete();
                     };
-                    
-                    img.onerror = function() {
-                        checkedCount++;
-                        checkComplete();
-                    };
-                    
                     img.src = imagePath;
                 });
-            }
-            
-            function checkComplete() {
-                if (checkedCount === totalChecks) {
-                    if (loadedCount === 0) {
-                        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: rgba(255,255,255,0.7);">No images found in this project.</div>';
-                    }
-                    // Sort photos by number order
-                    currentPhotos.sort((a, b) => a.index - b.index);
-                }
             }
         }
 
