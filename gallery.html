@@ -230,6 +230,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 10000;
             align-items: center;
             justify-content: center;
@@ -243,6 +244,8 @@
             max-width: 90%;
             max-height: 90%;
             object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
         .lightbox-close {
@@ -250,7 +253,6 @@
             top: 2rem;
             right: 2rem;
             color: white;
-            font-size: 3rem;
             cursor: pointer;
             width: 50px;
             height: 50px;
@@ -258,7 +260,33 @@
             align-items: center;
             justify-content: center;
             background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .lightbox-close::before,
+        .lightbox-close::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: white;
+        }
+
+        .lightbox-close::before {
+            transform: rotate(45deg);
+        }
+
+        .lightbox-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
         }
 
         .lightbox-nav {
@@ -266,7 +294,6 @@
             top: 50%;
             transform: translateY(-50%);
             color: white;
-            font-size: 3rem;
             cursor: pointer;
             width: 60px;
             height: 60px;
@@ -274,11 +301,45 @@
             align-items: center;
             justify-content: center;
             background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 10001;
+        }
+
+        .lightbox-nav svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .lightbox-prev { left: 2rem; }
         .lightbox-next { right: 2rem; }
+
+        @media (max-width: 768px) {
+            .lightbox-nav {
+                width: 50px;
+                height: 50px;
+            }
+
+            .lightbox-nav svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .lightbox-prev { left: 1rem; }
+            .lightbox-next { right: 1rem; }
+
+            .lightbox-close {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
 
         .dock-container {
             position: fixed;
@@ -577,99 +638,32 @@
     </div>
 
     <div class="lightbox" id="lightbox">
-        <div class="lightbox-close" onclick="closeLightbox()">×</div>
-        <div class="lightbox-prev" onclick="previousImage()">‹</div>
-        <div class="lightbox-next" onclick="nextImage()">›</div>
+        <div class="lightbox-close" onclick="closeLightbox()"></div>
+        <div class="lightbox-nav lightbox-prev" onclick="previousImage()">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="lightbox-nav lightbox-next" onclick="nextImage()">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18L15 12L9 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
         <img id="lightboxImage" src="" alt="">
     </div>
 
-    <div class="dock-container">
-        <nav class="dock">
-            <a href="index.html" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="glassGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <circle cx="9" cy="10.5" r="1.3" fill="white" opacity="0.9"/>
-                        <circle cx="15" cy="10.5" r="1.3" fill="white" opacity="0.9"/>
-                        <path d="M8.5 14C8.5 14 10 15.5 12 15.5C14 15.5 15.5 14 15.5 14" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Home</span>
-            </a>
-            <a href="gallery.html" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <!-- Sunflower petals (8 petals around center) -->
-                        <!-- Top -->
-                        <ellipse cx="12" cy="7.5" rx="1.2" ry="2" fill="white" opacity="0.85"/>
-                        <!-- Top-right -->
-                        <ellipse cx="14.8" cy="9.2" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(45 14.8 9.2)"/>
-                        <!-- Right -->
-                        <ellipse cx="16.5" cy="12" rx="2" ry="1.2" fill="white" opacity="0.85"/>
-                        <!-- Bottom-right -->
-                        <ellipse cx="14.8" cy="14.8" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(-45 14.8 14.8)"/>
-                        <!-- Bottom -->
-                        <ellipse cx="12" cy="16.5" rx="1.2" ry="2" fill="white" opacity="0.85"/>
-                        <!-- Bottom-left -->
-                        <ellipse cx="9.2" cy="14.8" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(45 9.2 14.8)"/>
-                        <!-- Left -->
-                        <ellipse cx="7.5" cy="12" rx="2" ry="1.2" fill="white" opacity="0.85"/>
-                        <!-- Top-left -->
-                        <ellipse cx="9.2" cy="9.2" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(-45 9.2 9.2)"/>
-                        <!-- Flower center (darker/larger for contrast) -->
-                        <circle cx="12" cy="12" r="2" fill="white" opacity="0.95"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Gallery</span>
-            </a>
-            <a href="#music" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <path d="M10 16V9L17 7.5V14.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-                        <circle cx="8" cy="16" r="2" fill="white" opacity="0.85"/>
-                        <circle cx="15" cy="14.5" r="2" fill="white" opacity="0.85"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Music</span>
-            </a>
-            <a href="#projects" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <!-- Folder tab -->
-                        <path d="M7 10V9C7 8.44772 7.44772 8 8 8H10.5L11.5 9H15C15.5523 9 16 9.44772 16 10V10" fill="white" opacity="0.85"/>
-                        <!-- Folder body -->
-                        <rect x="7" y="10" width="10" height="6" rx="1" fill="white" opacity="0.85"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Projects</span>
-            </a>
-            <a href="games.html" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <!-- Game controller body -->
-                        <path d="M7 10C7 9.44772 7.44772 9 8 9H16C16.5523 9 17 9.44772 17 10V14C17 14.5523 16.5523 15 16 15H8C7.44772 15 7 14.5523 7 14V10Z" fill="white" opacity="0.85"/>
-                        <!-- D-pad (left side) -->
-                        <rect x="8.5" y="11" width="1" height="2" fill="rgba(0,0,0,0.4)"/>
-                        <rect x="8" y="11.5" width="2" height="1" fill="rgba(0,0,0,0.4)"/>
-                        <!-- Buttons (right side) -->
-                        <circle cx="14" cy="11.5" r="0.6" fill="rgba(0,0,0,0.4)"/>
-                        <circle cx="15.5" cy="12.5" r="0.6" fill="rgba(0,0,0,0.4)"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Games</span>
-            </a>
-        </nav>
-    </div>
+    <!-- Dock loaded dynamically -->
+    <div id="dock-placeholder"></div>
+
+    <script>
+        // Load dock from separate file
+        fetch('dock.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('dock-placeholder').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading dock:', error));
+    </script>
 
     <script>
         // Gallery automatically reads project folders from gallery/gallery.json
