@@ -694,39 +694,28 @@
                     openProject({ name: folderName, folder: folderName });
                 };
 
-                // Try multiple image formats
-                const testImg = new Image();
-                const coverPath = `gallery/${folderName}/1.jpg`;
+                // Try multiple image formats, starting with PNG since that's common
+                const formats = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'PNG', 'JPG'];
+                let coverLoaded = false;
                 
-                testImg.onload = () => {
-                    const bg = card.querySelector('.project-card-bg');
-                    if (bg) {
-                        bg.style.backgroundImage = `url('${coverPath}')`;
-                    }
-                };
-                
-                testImg.onerror = () => {
-                    // Try other formats if jpg fails
-                    const formats = ['jpeg', 'png', 'gif', 'webp'];
-                    let found = false;
-                    
-                    formats.forEach(ext => {
-                        if (!found) {
-                            const altImg = new Image();
-                            const altPath = `gallery/${folderName}/1.${ext}`;
-                            altImg.onload = () => {
-                                found = true;
+                formats.forEach((ext, index) => {
+                    if (!coverLoaded) {
+                        const testImg = new Image();
+                        const coverPath = `gallery/${folderName}/1.${ext}`;
+                        
+                        testImg.onload = () => {
+                            if (!coverLoaded) {
+                                coverLoaded = true;
                                 const bg = card.querySelector('.project-card-bg');
                                 if (bg) {
-                                    bg.style.backgroundImage = `url('${altPath}')`;
+                                    bg.style.backgroundImage = `url('${coverPath}')`;
                                 }
-                            };
-                            altImg.src = altPath;
-                        }
-                    });
-                };
-                
-                testImg.src = coverPath;
+                            }
+                        };
+                        
+                        testImg.src = coverPath;
+                    }
+                });
                 
                 // Create card structure
                 const cardBg = document.createElement('div');
@@ -762,28 +751,40 @@
 
         function loadPhotos(project) {
             const grid = document.getElementById('photosGrid');
-            grid.innerHTML = '';
+            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: rgba(255,255,255,0.7);">Loading images...</div>';
             currentPhotos = [];
 
-            const extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'JPG', 'JPEG', 'PNG'];
+            const extensions = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'PNG', 'JPG', 'JPEG'];
+            let loadedCount = 0;
+            let totalAttempts = 0;
+            const maxNumber = 100;
+            const totalChecks = maxNumber * extensions.length;
             
-            for (let i = 1; i <= 100; i++) {
+            for (let i = 1; i <= maxNumber; i++) {
                 extensions.forEach(ext => {
                     const imagePath = `gallery/${project.folder}/${i}.${ext}`;
                     const img = new Image();
+                    
                     img.onload = function() {
-                        if (!currentPhotos.some(p => p.path === imagePath)) {
+                        // Check if we already have this number (avoid duplicates from different extensions)
+                        if (!currentPhotos.some(p => p.index === i)) {
                             currentPhotos.push({
                                 path: imagePath,
                                 index: i
                             });
+                            loadedCount++;
+                            
+                            // Clear loading message on first image
+                            if (loadedCount === 1) {
+                                grid.innerHTML = '';
+                            }
                             
                             const photoItem = document.createElement('div');
                             photoItem.className = 'photo-item';
-                            photoItem.style.order = i;
+                            photoItem.style.order = i; // Maintain number order
                             photoItem.onclick = () => {
                                 const sortedPhotos = [...currentPhotos].sort((a, b) => a.index - b.index);
-                                const photoIndex = sortedPhotos.findIndex(p => p.path === imagePath);
+                                const photoIndex = sortedPhotos.findIndex(p => p.index === i);
                                 openLightbox(photoIndex);
                             };
                             
@@ -794,9 +795,29 @@
                             photoItem.appendChild(photoImg);
                             grid.appendChild(photoItem);
                         }
+                        
+                        totalAttempts++;
+                        checkComplete();
                     };
+                    
+                    img.onerror = function() {
+                        totalAttempts++;
+                        checkComplete();
+                    };
+                    
                     img.src = imagePath;
                 });
+            }
+            
+            function checkComplete() {
+                // After all attempts, show message if no images found
+                if (totalAttempts >= totalChecks) {
+                    if (loadedCount === 0) {
+                        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: rgba(255,255,255,0.7);">No images found in this project. Make sure images are numbered (1.png, 2.png, etc.)</div>';
+                    }
+                    // Sort photos by number order
+                    currentPhotos.sort((a, b) => a.index - b.index);
+                }
             }
         }
 
