@@ -642,6 +642,10 @@
         // Gallery automatically reads project folders from gallery/gallery.json
         // Edit gallery/gallery.json to add/remove projects - no need to edit this HTML!
         
+        // IMPORTANT: Set this to your repository name if hosting on GitHub Pages
+        // For example: '/personal-site' or leave as '' for root domain
+        const BASE_PATH = '/personal-site';
+        
         let currentProject = null;
         let currentPhotoIndex = 0;
         let currentPhotos = [];
@@ -655,7 +659,7 @@
         // Load project list from gallery/gallery.json
         async function loadProjectsFromFile() {
             try {
-                const response = await fetch('gallery/gallery.json');
+                const response = await fetch(`${BASE_PATH}/gallery/gallery.json`);
                 if (!response.ok) {
                     throw new Error('Could not load gallery/gallery.json');
                 }
@@ -704,7 +708,7 @@
                 formats.forEach((ext, index) => {
                     if (!coverLoaded) {
                         const testImg = new Image();
-                        const coverPath = `gallery/${encodedFolder}/1.${ext}`;
+                        const coverPath = `${BASE_PATH}/gallery/${encodedFolder}/1.${ext}`;
                         
                         testImg.onload = () => {
                             if (!coverLoaded) {
@@ -771,7 +775,7 @@
             
             for (let i = 1; i <= maxNumber; i++) {
                 extensions.forEach(ext => {
-                    const imagePath = `gallery/${encodedFolder}/${i}.${ext}`;
+                    const imagePath = `${BASE_PATH}/gallery/${encodedFolder}/${i}.${ext}`;
                     if (i <= 3) console.log('Trying to load:', imagePath);
                     
                     const img = new Image();
