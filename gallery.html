@@ -694,6 +694,9 @@
                     openProject({ name: folderName, folder: folderName });
                 };
 
+                // Encode folder name for URL
+                const encodedFolder = encodeURIComponent(folderName);
+                
                 // Try multiple image formats, starting with PNG since that's common
                 const formats = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'PNG', 'JPG'];
                 let coverLoaded = false;
@@ -701,7 +704,7 @@
                 formats.forEach((ext, index) => {
                     if (!coverLoaded) {
                         const testImg = new Image();
-                        const coverPath = `gallery/${folderName}/1.${ext}`;
+                        const coverPath = `gallery/${encodedFolder}/1.${ext}`;
                         
                         testImg.onload = () => {
                             if (!coverLoaded) {
@@ -763,16 +766,18 @@
             const maxNumber = 100;
             const totalChecks = maxNumber * extensions.length;
             
+            // Encode the folder name for URL
+            const encodedFolder = encodeURIComponent(project.folder);
+            
             for (let i = 1; i <= maxNumber; i++) {
                 extensions.forEach(ext => {
-                    const imagePath = `gallery/${project.folder}/${i}.${ext}`;
-                    if (i <= 3) console.log('Trying to load:', imagePath); // Log first 3 attempts
+                    const imagePath = `gallery/${encodedFolder}/${i}.${ext}`;
+                    if (i <= 3) console.log('Trying to load:', imagePath);
                     
                     const img = new Image();
                     
                     img.onload = function() {
                         console.log('Successfully loaded:', imagePath);
-                        // Check if we already have this number (avoid duplicates from different extensions)
                         if (!currentPhotos.some(p => p.index === i)) {
                             currentPhotos.push({
                                 path: imagePath,
@@ -780,14 +785,13 @@
                             });
                             loadedCount++;
                             
-                            // Clear loading message on first image
                             if (loadedCount === 1) {
                                 grid.innerHTML = '';
                             }
                             
                             const photoItem = document.createElement('div');
                             photoItem.className = 'photo-item';
-                            photoItem.style.order = i; // Maintain number order
+                            photoItem.style.order = i;
                             photoItem.onclick = () => {
                                 const sortedPhotos = [...currentPhotos].sort((a, b) => a.index - b.index);
                                 const photoIndex = sortedPhotos.findIndex(p => p.index === i);
@@ -817,13 +821,11 @@
             }
             
             function checkComplete() {
-                // After all attempts, show message if no images found
                 if (totalAttempts >= totalChecks) {
                     console.log('Total images loaded:', loadedCount);
                     if (loadedCount === 0) {
                         grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: rgba(255,255,255,0.7);">No images found in this project. Make sure images are numbered (1.png, 2.png, etc.)</div>';
                     }
-                    // Sort photos by number order
                     currentPhotos.sort((a, b) => a.index - b.index);
                 }
             }
