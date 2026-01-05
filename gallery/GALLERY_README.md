@@ -2,14 +2,14 @@
 
 ## 📁 How the Gallery Works
 
-The gallery reads project folders from a simple **`gallery.md`** file - no HTML editing required!
+The gallery reads project folders from **`gallery.json`** - a simple configuration file!
 
 ## 🎨 Folder Structure
 
 ```
 your-website/
 ├── gallery.html
-├── gallery.md          ← Edit this file to add projects!
+├── gallery.json        ← Edit this file to add projects!
 └── gallery/
     ├── Union Latina-União Latina/
     │   ├── 1.jpg
@@ -23,31 +23,29 @@ your-website/
         └── 2.jpg
 ```
 
-## ✏️ Adding Projects - Edit `gallery.md`
+## ✏️ Adding Projects - Edit `gallery.json`
 
-Open **`gallery.md`** and add folder names, one per line:
+Open **`gallery.json`** and add folder names to the array:
 
-```markdown
-# Gallery Projects
-
-Add your project folder names below, one per line.
-Lines starting with # are comments and will be ignored.
-
-Union Latina-União Latina
-place-holder
-my-new-project
-vacation-2024
+```json
+{
+  "projects": [
+    "Union Latina-União Latina",
+    "place-holder",
+    "my-new-project",
+    "vacation-2024"
+  ]
+}
 ```
 
 **That's it!** Save the file and refresh the gallery page.
 
-## 📝 Rules for `gallery.md`
+## 📝 Rules for `gallery.json`
 
-- **One folder name per line**
-- Lines starting with `#` are comments (ignored)
-- Empty lines are ignored
+- **JSON array format** with folder names in quotes
+- **Comma after each item** (except the last one)
 - Folder names must match exactly (case-sensitive)
-- No quotes or special formatting needed
+- Must be valid JSON syntax
 
 ## 🖼️ Image Naming
 
@@ -60,31 +58,28 @@ Images in each folder should be numbered:
 
 1. **Create folder**: `/gallery/my-project/`
 2. **Add images**: `1.jpg`, `2.jpg`, `3.jpg`
-3. **Edit gallery.md**: Add line `my-project`
+3. **Edit gallery.json**: Add `"my-project"` to the array
 4. **Refresh page** - Done! ✨
 
-## 💡 Example `gallery.md`
+## 💡 Example `gallery.json`
 
-```markdown
-# My Gallery Projects
-# Add one folder name per line
-
-Union Latina-União Latina
-place-holder
-street-photography
-portraits-2024
-digital-art
-vacation-photos
-
-# You can add comments anywhere with #
-# Empty lines are fine too
+```json
+{
+  "projects": [
+    "Union Latina-União Latina",
+    "place-holder",
+    "street-photography",
+    "portraits-2024",
+    "digital-art",
+    "vacation-photos"
+  ]
+}
 ```
 
 ## ✨ Features
 
-- **No HTML editing** - just edit gallery.md
-- **Simple text file** - easy to manage
-- **Comments supported** - document your projects
+- **No HTML editing** - just edit gallery.json
+- **Simple JSON file** - easy to manage
 - **Automatic loading** - gallery reads the file on page load
 - **Beautiful cards** - first image becomes the cover
 - **Full lightbox** - click photos to view full-screen
@@ -93,8 +88,9 @@ vacation-photos
 ## 🔧 Troubleshooting
 
 **Projects not showing?**
-- Make sure `gallery.md` is in the same directory as `gallery.html`
-- Check folder names match exactly (case-sensitive)
+- Make sure `gallery.json` is in the same directory as `gallery.html`
+- Check that JSON syntax is valid (use a JSON validator)
+- Folder names must match exactly (case-sensitive)
 - Make sure folders contain numbered images (1.jpg, 2.jpg, etc.)
 
 **Images not loading?**
@@ -102,8 +98,12 @@ vacation-photos
 - Check file extensions (.jpg, .png, etc.)
 - Images must be in `/gallery/folder-name/`
 
-## 📋 No Configuration Files to Edit
+## 📋 JSON Format Notes
 
-Before: Edit HTML code to add projects ❌  
-Now: Edit simple `gallery.md` text file ✅
+- Always use double quotes `"` not single quotes `'`
+- Don't forget commas between items
+- No comma after the last item
+- Use a JSON validator if you get errors
 
+Before: Edit HTML code ❌  
+Now: Edit simple gallery.json file ✅
