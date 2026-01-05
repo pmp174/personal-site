@@ -14,28 +14,16 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: url('images/background.jpg') center/cover no-repeat fixed;
             min-height: 100vh;
-            min-height: -webkit-fill-available;
-            margin: 0;
-            padding: 0;
             overflow-x: hidden;
-        }
-
-        html {
-            height: -webkit-fill-available;
-            background: url('images/background.jpg') center/cover no-repeat fixed;
-            scroll-behavior: smooth;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-            overflow-x: hidden;
             padding-bottom: 10rem;
             padding-top: 3rem;
         }
@@ -43,784 +31,483 @@
         .content-wrapper {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 28px;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
-                        0 2px 8px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), 
-                        box-shadow 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-            will-change: transform;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.8s ease;
         }
 
         .content-wrapper:hover {
             transform: scale(1.025);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                        0 12px 32px rgba(0, 0, 0, 0.35);
         }
 
-        .content-wrapper.touch-active {
-            transform: scale(1.04);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
-                        0 16px 48px rgba(0, 0, 0, 0.4);
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
-                        box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .content-wrapper::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            background: radial-gradient(
-                circle 1200px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-                rgba(255, 255, 255, 0.08),
-                transparent 50%
-            );
-            opacity: 0;
-            transition: opacity 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            pointer-events: none;
-            border-radius: 28px;
-            filter: blur(80px);
-            will-change: opacity;
-        }
-
-        .content-wrapper:hover::before {
-            opacity: 1;
-        }
-
-        .content-wrapper.touch-active::before {
-            opacity: 1;
-        }
-
-        .content-wrapper::after {
-            display: none;
-        }
-
-        /* macOS Stoplight Buttons - Social Links */
-        .stoplight-buttons {
-            position: absolute;
-            top: 1.25rem;
-            left: 1.25rem;
-            display: flex;
-            gap: 0.6rem;
-            z-index: 10;
-        }
-
-        .stoplight-btn {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.35);
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 100%);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4),
-                        0 2px 6px rgba(0, 0, 0, 0.25);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: visible;
-        }
-
-        .stoplight-btn::before {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            transition: opacity 0.3s ease;
-            box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
-        }
-
-        .stoplight-btn:hover {
-            transform: scale(1.3);
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.15) 100%);
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.5),
-                        0 4px 12px rgba(0, 0, 0, 0.3),
-                        0 0 12px rgba(255, 255, 255, 0.2);
-        }
-
-        .stoplight-btn:hover::before {
-            opacity: 0;
-        }
-
-        .stoplight-btn:active {
-            transform: scale(1.2);
-        }
-
-        .stoplight-btn svg {
-            width: 10px;
-            height: 10px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            color: rgba(255, 255, 255, 0.95);
-            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
-        }
-
-        .stoplight-btn:hover svg {
-            opacity: 1;
-        }
-
-        .stoplight-btn .tooltip {
-            position: absolute;
-            top: calc(100% + 0.6rem);
-            left: 50%;
-            transform: translateX(-50%) translateY(4px);
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: white;
-            padding: 0.4rem 0.7rem;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        }
-
-        .stoplight-btn:hover .tooltip {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* Gallery Header */
-        .gallery-header {
-            padding: 3rem 2.5rem 2rem 2.5rem;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .gallery-header h1 {
-            color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+        h1 {
+            font-size: 3rem;
             font-weight: 700;
+            text-align: center;
+            padding: 3rem 2rem 1rem;
+            color: white;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .gallery-header p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.1rem;
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 0 2rem 3rem;
+            font-size: 1.2rem;
         }
 
-        /* Gallery Grid */
         .gallery-content {
-            padding: 2rem 2.5rem 3rem 2.5rem;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            padding: 2rem;
         }
 
-        .gallery-grid {
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
-        .gallery-item {
+        .project-card {
             position: relative;
-            aspect-ratio: 1/1;
+            aspect-ratio: 4/3;
             border-radius: 24px;
             overflow: hidden;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                        0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4),
-                        0 12px 32px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.9;
-            transition: opacity 0.3s ease, transform 0.4s ease;
-        }
-
-        .gallery-item:hover img {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        .gallery-item-year {
-            position: absolute;
-            top: 1.5rem;
-            left: 1.5rem;
-            color: white;
-            font-size: 3rem;
-            font-weight: 700;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-            z-index: 2;
-        }
-
-        .gallery-item-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-item:hover .gallery-item-overlay {
-            opacity: 1;
-        }
-
-        .gallery-item-title {
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .gallery-item-description {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.85rem;
-        }
-
-        /* Placeholder for empty gallery items */
-        .gallery-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .gallery-placeholder-icon {
-            font-size: 3rem;
-            opacity: 0.4;
-        }
-
-        .gallery-placeholder-text {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
-            .stoplight-buttons {
-                position: fixed;
-                top: 1rem;
-                left: 1rem;
-                gap: 0.5rem;
-                z-index: 1001;
-            }
-
-            .stoplight-btn {
-                width: 18px;
-                height: 18px;
-            }
-
-            .stoplight-btn svg {
-                width: 11px;
-                height: 11px;
-            }
-
-            .stoplight-btn .tooltip {
-                display: none;
-            }
-
-            .content-wrapper {
-                grid-template-columns: 1fr;
-                border-radius: 28px;
-            }
-
-            .container {
-                padding: 1rem;
-                padding-bottom: 2rem;
-                padding-top: max(3rem, calc(env(safe-area-inset-top) + 2rem));
-            }
-
-            .gallery-header {
-                padding: 2.5rem 1.5rem 1.5rem 1.5rem;
-            }
-
-            .gallery-header h1 {
-                font-size: 2rem;
-            }
-
-            .gallery-content {
-                padding: 1.5rem;
-                padding-bottom: 2.5rem;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .gallery-item {
-                border-radius: 20px;
-            }
-
-            .gallery-item-year {
-                font-size: 2rem;
-                top: 1rem;
-                left: 1rem;
-            }
-        }
-
-        /* macOS-style Dock */
-        .dock-container {
-            position: fixed;
-            bottom: 1rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: center;
-            padding: 0 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .dock-container {
-                position: relative;
-                bottom: auto;
-                left: auto;
-                transform: none;
-                padding: 2rem 1rem 1.5rem 1rem;
-                max-width: 100%;
-            }
-        }
-
-        .dock {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 28px;
-            padding: 0.6rem 1rem;
-            display: flex;
-            align-items: flex-end;
-            gap: 1rem;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                        0 10px 40px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        @media (max-width: 768px) {
-            .dock {
-                margin: 0 auto;
-                max-width: fit-content;
-                padding: 0.5rem 0.8rem;
-                gap: 0.8rem;
-                border-radius: 28px;
-            }
-        }
-
-        .dock-item {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            transition: all 0.4s ease;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            color: white;
         }
 
-        .dock-icon {
-            width: 52px;
-            height: 52px;
-            background: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            cursor: pointer;
-            position: relative;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
         }
 
-        .dock-icon svg {
-            width: 100%;
-            height: 100%;
+        .project-card-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
             transition: all 0.3s ease;
         }
 
-        .dock-item:hover .dock-icon {
-            transform: translateY(-14px) scale(1.25);
-            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.4)) 
-                    drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+        .project-card:hover .project-card-bg {
+            opacity: 0.7;
+            transform: scale(1.05);
         }
 
-        .dock-item:hover .dock-icon svg {
+        .project-card-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        .project-card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-card-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-view {
+            display: none;
+        }
+
+        .project-view.active {
+            display: block;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-4px);
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .photo-item {
+            position: relative;
+            aspect-ratio: 1/1;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .photo-item:hover {
             transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .lightbox-prev { left: 2rem; }
+        .lightbox-next { right: 2rem; }
+
+        .dock-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .dock {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            pointer-events: all;
+        }
+
+        .dock-item {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .dock-item:hover {
+            transform: translateY(-12px) scale(1.2);
+        }
+
+        .dock-icon {
+            width: 32px;
+            height: 32px;
         }
 
         .dock-label {
             position: absolute;
-            bottom: calc(100% + 0.6rem);
-            left: 50%;
-            transform: translateX(-50%) translateY(4px);
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            bottom: 80px;
+            background: rgba(0, 0, 0, 0.8);
             color: white;
-            padding: 0.4rem 0.7rem;
-            border-radius: 6px;
-            font-size: 0.7rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
             white-space: nowrap;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s;
         }
 
         .dock-item:hover .dock-label {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        @media (max-width: 768px) {
-            .dock-icon {
-                width: 48px;
-                height: 48px;
-            }
-
-            .dock-item:hover .dock-icon {
-                transform: translateY(-10px) scale(1.2);
-            }
-
-            .dock-label {
-                display: none;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="content-wrapper">
-            <!-- macOS Stoplight Social Buttons -->
-            <div class="stoplight-buttons">
-                <a href="https://www.youtube.com/@your-channel" target="_blank" rel="noopener noreferrer" class="stoplight-btn">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M23 9.71a8.5 8.5 0 00-.91-4.13 2.92 2.92 0 00-1.72-1A78.36 78.36 0 0012 4.27a78.45 78.45 0 00-8.34.3 2.87 2.87 0 00-1.46.74c-.9.83-1 2.25-1.1 3.45a48.29 48.29 0 000 6.48 9.55 9.55 0 00.3 2 3.14 3.14 0 00.71 1.36 2.86 2.86 0 001.49.78 45.18 45.18 0 006.5.33c3.5.05 6.57 0 10.2-.28a2.88 2.88 0 001.53-.78 2.49 2.49 0 00.61-1 10.58 10.58 0 00.52-3.4c.04-.56.04-3.94.04-4.54zM9.74 14.85V8.66l5.92 3.11c-1.66.92-3.85 1.96-5.92 3.08z" fill="currentColor"/>
-                    </svg>
-                    <span class="tooltip">YouTube</span>
-                </a>
-                <a href="https://bsky.app/profile/your-handle.bsky.social" target="_blank" rel="noopener noreferrer" class="stoplight-btn">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.815 2.736 3.713 3.66 6.383 3.364.136-.02.275-.039.415-.056-.138.022-.276.04-.415.056-3.912.58-7.387 2.005-2.83 7.078 5.013 5.19 6.87-1.113 7.823-4.308.953 3.195 2.05 9.271 7.733 4.308 4.267-4.308 1.172-6.498-2.74-7.078a8.741 8.741 0 01-.415-.056c.14.017.279.036.415.056 2.67.297 5.568-.628 6.383-3.364.246-.828.624-5.79.624-6.478 0-.69-.139-1.861-.902-2.206-.659-.298-1.664-.62-4.3 1.24C16.046 4.748 13.087 8.687 12 10.8z" fill="currentColor"/>
-                    </svg>
-                    <span class="tooltip">Bluesky</span>
-                </a>
-                <a href="mailto:your-email@example.com" class="stoplight-btn">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
-                        <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <span class="tooltip">Email</span>
-                </a>
-            </div>
+            <h1>Gallery</h1>
+            <p class="subtitle">Explore my projects</p>
 
-            <!-- Gallery Header -->
-            <div class="gallery-header">
-                <h1>Gallery</h1>
-                <p>A collection of moments and memories</p>
-            </div>
-
-            <!-- Gallery Content -->
             <div class="gallery-content">
-                <div class="gallery-grid">
-                    <!-- Gallery Item 1 -->
-                    <div class="gallery-item">
-                        <div class="gallery-item-year">2022</div>
-                        <div class="gallery-placeholder">
-                            <div class="gallery-placeholder-icon">🖼️</div>
-                            <div class="gallery-placeholder-text">Add Photo</div>
-                        </div>
-                        <div class="gallery-item-overlay">
-                            <div class="gallery-item-title">Memory from 2022</div>
-                            <div class="gallery-item-description">Add your description here</div>
-                        </div>
-                    </div>
+                <div id="projectsView">
+                    <div class="projects-grid" id="projectsGrid"></div>
+                </div>
 
-                    <!-- Gallery Item 2 -->
-                    <div class="gallery-item">
-                        <div class="gallery-item-year">2023</div>
-                        <div class="gallery-placeholder">
-                            <div class="gallery-placeholder-icon">🖼️</div>
-                            <div class="gallery-placeholder-text">Add Photo</div>
-                        </div>
-                        <div class="gallery-item-overlay">
-                            <div class="gallery-item-title">Memory from 2023</div>
-                            <div class="gallery-item-description">Add your description here</div>
-                        </div>
-                    </div>
-
-                    <!-- Gallery Item 3 -->
-                    <div class="gallery-item">
-                        <div class="gallery-item-year">2024</div>
-                        <div class="gallery-placeholder">
-                            <div class="gallery-placeholder-icon">🖼️</div>
-                            <div class="gallery-placeholder-text">Add Photo</div>
-                        </div>
-                        <div class="gallery-item-overlay">
-                            <div class="gallery-item-title">Memory from 2024</div>
-                            <div class="gallery-item-description">Add your description here</div>
-                        </div>
-                    </div>
-
-                    <!-- Gallery Item 4 -->
-                    <div class="gallery-item">
-                        <div class="gallery-item-year">2025</div>
-                        <div class="gallery-placeholder">
-                            <div class="gallery-placeholder-icon">🖼️</div>
-                            <div class="gallery-placeholder-text">Add Photo</div>
-                        </div>
-                        <div class="gallery-item-overlay">
-                            <div class="gallery-item-title">Memory from 2025</div>
-                            <div class="gallery-item-description">Add your description here</div>
-                        </div>
-                    </div>
-
-                    <!-- Gallery Item 5 -->
-                    <div class="gallery-item">
-                        <div class="gallery-item-year">2026</div>
-                        <div class="gallery-placeholder">
-                            <div class="gallery-placeholder-icon">🖼️</div>
-                            <div class="gallery-placeholder-text">Add Photo</div>
-                        </div>
-                        <div class="gallery-item-overlay">
-                            <div class="gallery-item-title">Memory from 2026</div>
-                            <div class="gallery-item-description">Add your description here</div>
-                        </div>
-                    </div>
-
-                    <!-- Gallery Item 6 -->
-                    <div class="gallery-item">
-                        <div class="gallery-item-year">2027</div>
-                        <div class="gallery-placeholder">
-                            <div class="gallery-placeholder-icon">🖼️</div>
-                            <div class="gallery-placeholder-text">Add Photo</div>
-                        </div>
-                        <div class="gallery-item-overlay">
-                            <div class="gallery-item-title">Memory from 2027</div>
-                            <div class="gallery-item-description">Add your description here</div>
-                        </div>
-                    </div>
+                <div id="projectView" class="project-view">
+                    <button class="back-button" onclick="showProjects()">← Back</button>
+                    <h2 class="project-title" id="currentProjectTitle"></h2>
+                    <div class="photos-grid" id="photosGrid"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- macOS-style Dock -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-close" onclick="closeLightbox()">×</div>
+        <div class="lightbox-prev" onclick="previousImage()">‹</div>
+        <div class="lightbox-next" onclick="nextImage()">›</div>
+        <img id="lightboxImage" src="" alt="">
+    </div>
+
     <div class="dock-container">
         <nav class="dock">
             <a href="index.html" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="glassGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <circle cx="9" cy="10.5" r="1.3" fill="white" opacity="0.9"/>
-                        <circle cx="15" cy="10.5" r="1.3" fill="white" opacity="0.9"/>
-                        <path d="M8.5 14C8.5 14 10 15.5 12 15.5C14 15.5 15.5 14 15.5 14" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
-                    </svg>
-                </div>
+                <svg class="dock-icon" viewBox="0 0 24 24" fill="none">
+                    <rect x="4" y="4" width="16" height="16" rx="3.5" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                    <circle cx="9" cy="10.5" r="1.3" fill="white"/>
+                    <circle cx="15" cy="10.5" r="1.3" fill="white"/>
+                    <path d="M8 14c0 2 1.5 3 4 3s4-1 4-3" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
                 <span class="dock-label">Home</span>
             </a>
+            <a href="blog.html" class="dock-item">
+                <svg class="dock-icon" viewBox="0 0 24 24" fill="none">
+                    <rect x="5" y="4" width="14" height="16" rx="2" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                    <line x1="8" y1="9" x2="16" y2="9" stroke="white" stroke-width="1.5"/>
+                    <line x1="8" y1="13" x2="16" y2="13" stroke="white" stroke-width="1.5"/>
+                </svg>
+                <span class="dock-label">Blog</span>
+            </a>
             <a href="gallery.html" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <!-- Sunflower petals -->
-                        <ellipse cx="12" cy="7.5" rx="1.2" ry="2" fill="white" opacity="0.85"/>
-                        <ellipse cx="14.8" cy="9.2" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(45 14.8 9.2)"/>
-                        <ellipse cx="16.5" cy="12" rx="2" ry="1.2" fill="white" opacity="0.85"/>
-                        <ellipse cx="14.8" cy="14.8" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(-45 14.8 14.8)"/>
-                        <ellipse cx="12" cy="16.5" rx="1.2" ry="2" fill="white" opacity="0.85"/>
-                        <ellipse cx="9.2" cy="14.8" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(45 9.2 14.8)"/>
-                        <ellipse cx="7.5" cy="12" rx="2" ry="1.2" fill="white" opacity="0.85"/>
-                        <ellipse cx="9.2" cy="9.2" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(-45 9.2 9.2)"/>
-                        <circle cx="12" cy="12" r="2" fill="white" opacity="0.95"/>
-                    </svg>
-                </div>
+                <svg class="dock-icon" viewBox="0 0 24 24" fill="none">
+                    <rect x="4" y="6" width="16" height="12" rx="2" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                    <circle cx="9" cy="10" r="1.5" fill="white"/>
+                    <path d="M4 15l4-4 3 3 5-5 4 4" stroke="white" stroke-width="1.5"/>
+                </svg>
                 <span class="dock-label">Gallery</span>
             </a>
-            <a href="#music" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <path d="M10 16V9L17 7.5V14.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-                        <circle cx="8" cy="16" r="2" fill="white" opacity="0.85"/>
-                        <circle cx="15" cy="14.5" r="2" fill="white" opacity="0.85"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Music</span>
-            </a>
-            <a href="#projects" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <path d="M7 10V9C7 8.44772 7.44772 8 8 8H10.5L11.5 9H15C15.5523 9 16 9.44772 16 10V10" fill="white" opacity="0.85"/>
-                        <rect x="7" y="10" width="10" height="6" rx="1" fill="white" opacity="0.85"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Projects</span>
-            </a>
             <a href="games.html" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <!-- Game controller body -->
-                        <path d="M7 10C7 9.44772 7.44772 9 8 9H16C16.5523 9 17 9.44772 17 10V14C17 14.5523 16.5523 15 16 15H8C7.44772 15 7 14.5523 7 14V10Z" fill="white" opacity="0.85"/>
-                        <!-- D-pad (left side) -->
-                        <rect x="8.5" y="11" width="1" height="2" fill="rgba(0,0,0,0.4)"/>
-                        <rect x="8" y="11.5" width="2" height="1" fill="rgba(0,0,0,0.4)"/>
-                        <!-- Buttons (right side) -->
-                        <circle cx="14" cy="11.5" r="0.6" fill="rgba(0,0,0,0.4)"/>
-                        <circle cx="15.5" cy="12.5" r="0.6" fill="rgba(0,0,0,0.4)"/>
-                    </svg>
-                </div>
+                <svg class="dock-icon" viewBox="0 0 24 24" fill="none">
+                    <rect x="6" y="8" width="12" height="8" rx="2" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                    <circle cx="10" cy="12" r="1" fill="white"/>
+                    <circle cx="14" cy="12" r="1" fill="white"/>
+                </svg>
                 <span class="dock-label">Games</span>
             </a>
         </nav>
     </div>
 
     <script>
-        // Mouse tracking for edge highlight effect - smooth and fluid
-        const contentWrapper = document.querySelector('.content-wrapper');
-        let mouseFrame = null;
-        
-        contentWrapper.addEventListener('mousemove', (e) => {
-            if (mouseFrame) {
-                cancelAnimationFrame(mouseFrame);
-            }
-            
-            mouseFrame = requestAnimationFrame(() => {
-                const rect = contentWrapper.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const xPercent = (x / rect.width) * 100;
-                const yPercent = (y / rect.height) * 100;
-                
-                contentWrapper.style.setProperty('--mouse-x', `${xPercent}%`);
-                contentWrapper.style.setProperty('--mouse-y', `${yPercent}%`);
-            });
-        });
-
-        // Touch tracking for mobile devices - smooth liquid glass feel
-        let touchActive = false;
-        let animationFrame = null;
-        
-        contentWrapper.addEventListener('touchstart', (e) => {
-            touchActive = true;
-            contentWrapper.classList.add('touch-active');
-            updateTouchPosition(e);
-        }, { passive: true });
-        
-        contentWrapper.addEventListener('touchmove', (e) => {
-            if (touchActive) {
-                if (animationFrame) {
-                    cancelAnimationFrame(animationFrame);
+        // ===== EDIT THIS CONFIGURATION =====
+        const GALLERY_CONFIG = {
+            projects: [
+                {
+                    name: "Latin American Art",
+                    folder: "latin-american-art"
+                },
+                {
+                    name: "Photography",
+                    folder: "photography"
+                },
+                {
+                    name: "Digital Art",
+                    folder: "digital-art"
                 }
-                animationFrame = requestAnimationFrame(() => {
-                    updateTouchPosition(e);
-                });
-            }
-        }, { passive: true });
-        
-        contentWrapper.addEventListener('touchend', () => {
-            touchActive = false;
-            if (animationFrame) {
-                cancelAnimationFrame(animationFrame);
-            }
-            setTimeout(() => {
-                contentWrapper.classList.remove('touch-active');
-            }, 800);
-        });
-        
-        function updateTouchPosition(e) {
-            const touch = e.touches[0];
-            const rect = contentWrapper.getBoundingClientRect();
-            const x = touch.clientX - rect.left;
-            const y = touch.clientY - rect.top;
-            
-            const xPercent = (x / rect.width) * 100;
-            const yPercent = (y / rect.height) * 100;
-            
-            contentWrapper.style.setProperty('--mouse-x', `${xPercent}%`);
-            contentWrapper.style.setProperty('--mouse-y', `${yPercent}%`);
-        }
+            ]
+        };
+        // ====================================
 
-        // Dock magnification effect
-        function initializeDock() {
-            const dockItems = document.querySelectorAll('.dock-item');
-            
-            dockItems.forEach((item, index) => {
-                const icon = item.querySelector('.dock-icon');
+        let currentProject = null;
+        let currentPhotoIndex = 0;
+        let currentPhotos = [];
+
+        window.addEventListener('DOMContentLoaded', loadProjects);
+
+        function loadProjects() {
+            const grid = document.getElementById('projectsGrid');
+            grid.innerHTML = '';
+
+            GALLERY_CONFIG.projects.forEach(project => {
+                const card = document.createElement('a');
+                card.className = 'project-card';
+                card.href = '#';
+                card.onclick = (e) => {
+                    e.preventDefault();
+                    openProject(project);
+                };
+
+                const coverPath = `gallery/${project.folder}/1.jpg`;
                 
-                setTimeout(() => {
-                    icon.style.animation = 'bounce-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                }, index * 100);
-                
-                item.addEventListener('touchstart', (e) => {
-                    icon.style.transform = 'translateY(-8px) scale(1.15)';
-                }, { passive: true });
-                
-                item.addEventListener('touchend', () => {
-                    setTimeout(() => {
-                        icon.style.transform = '';
-                    }, 150);
-                });
+                card.innerHTML = `
+                    <div class="project-card-bg" style="background-image: url('${coverPath}');"></div>
+                    <div class="project-card-content">
+                        <div class="project-card-icon">📁</div>
+                        <div class="project-card-title">${project.name}</div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
             });
         }
 
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes bounce-in {
-                0% {
-                    transform: translateY(100px) scale(0);
-                    opacity: 0;
-                }
-                50% {
-                    transform: translateY(-10px) scale(1.1);
-                }
-                100% {
-                    transform: translateY(0) scale(1);
-                    opacity: 1;
-                }
-            }
-        `;
-        document.head.appendChild(style);
+        function openProject(project) {
+            currentProject = project;
+            document.getElementById('currentProjectTitle').textContent = project.name;
+            loadPhotos(project);
+            document.getElementById('projectsView').style.display = 'none';
+            document.getElementById('projectView').classList.add('active');
+        }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            initializeDock();
+        function loadPhotos(project) {
+            const grid = document.getElementById('photosGrid');
+            grid.innerHTML = '';
+            currentPhotos = [];
+
+            // Try loading numbered images
+            const extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+            
+            for (let i = 1; i <= 100; i++) {
+                extensions.forEach(ext => {
+                    const imagePath = `gallery/${project.folder}/${i}.${ext}`;
+                    const img = new Image();
+                    img.onload = function() {
+                        if (!currentPhotos.includes(imagePath)) {
+                            currentPhotos.push(imagePath);
+                            
+                            const photoItem = document.createElement('div');
+                            photoItem.className = 'photo-item';
+                            photoItem.onclick = () => openLightbox(currentPhotos.indexOf(imagePath));
+                            
+                            const photoImg = document.createElement('img');
+                            photoImg.src = imagePath;
+                            photoImg.alt = `${project.name} - Photo ${currentPhotos.length}`;
+                            
+                            photoItem.appendChild(photoImg);
+                            grid.appendChild(photoItem);
+                        }
+                    };
+                    img.src = imagePath;
+                });
+            }
+        }
+
+        function showProjects() {
+            document.getElementById('projectView').classList.remove('active');
+            document.getElementById('projectsView').style.display = 'block';
+        }
+
+        function openLightbox(index) {
+            currentPhotoIndex = index;
+            document.getElementById('lightboxImage').src = currentPhotos[index];
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function previousImage() {
+            currentPhotoIndex = (currentPhotoIndex - 1 + currentPhotos.length) % currentPhotos.length;
+            document.getElementById('lightboxImage').src = currentPhotos[currentPhotoIndex];
+        }
+
+        function nextImage() {
+            currentPhotoIndex = (currentPhotoIndex + 1) % currentPhotos.length;
+            document.getElementById('lightboxImage').src = currentPhotos[currentPhotoIndex];
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') previousImage();
+                if (e.key === 'ArrowRight') nextImage();
+            }
+        });
+
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
         });
     </script>
 </body>
