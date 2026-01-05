@@ -664,78 +664,18 @@
     </div>
 
     <!-- macOS-style Dock -->
-    <div class="dock-container">
-        <nav class="dock">
-            <a href="index.html" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="glassGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <circle cx="9" cy="10.5" r="1.3" fill="white" opacity="0.9"/>
-                        <circle cx="15" cy="10.5" r="1.3" fill="white" opacity="0.9"/>
-                        <path d="M8.5 14C8.5 14 10 15.5 12 15.5C14 15.5 15.5 14 15.5 14" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Home</span>
-            </a>
-            <a href="gallery.html" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <ellipse cx="12" cy="7.5" rx="1.2" ry="2" fill="white" opacity="0.85"/>
-                        <ellipse cx="14.8" cy="9.2" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(45 14.8 9.2)"/>
-                        <ellipse cx="16.5" cy="12" rx="2" ry="1.2" fill="white" opacity="0.85"/>
-                        <ellipse cx="14.8" cy="14.8" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(-45 14.8 14.8)"/>
-                        <ellipse cx="12" cy="16.5" rx="1.2" ry="2" fill="white" opacity="0.85"/>
-                        <ellipse cx="9.2" cy="14.8" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(45 9.2 14.8)"/>
-                        <ellipse cx="7.5" cy="12" rx="2" ry="1.2" fill="white" opacity="0.85"/>
-                        <ellipse cx="9.2" cy="9.2" rx="1.2" ry="2" fill="white" opacity="0.85" transform="rotate(-45 9.2 9.2)"/>
-                        <circle cx="12" cy="12" r="2" fill="white" opacity="0.95"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Gallery</span>
-            </a>
-            <a href="#music" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <path d="M10 16V9L17 7.5V14.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
-                        <circle cx="8" cy="16" r="2" fill="white" opacity="0.85"/>
-                        <circle cx="15" cy="14.5" r="2" fill="white" opacity="0.85"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Music</span>
-            </a>
-            <a href="#projects" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <path d="M7 10V9C7 8.44772 7.44772 8 8 8H10.5L11.5 9H15C15.5523 9 16 9.44772 16 10V10" fill="white" opacity="0.85"/>
-                        <rect x="7" y="10" width="10" height="6" rx="1" fill="white" opacity="0.85"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Projects</span>
-            </a>
-            <a href="games.html" class="dock-item">
-                <div class="dock-icon">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="4" y="4" width="16" height="16" rx="3.5" fill="url(#glassGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
-                        <path d="M7 10C7 9.44772 7.44772 9 8 9H16C16.5523 9 17 9.44772 17 10V14C17 14.5523 16.5523 15 16 15H8C7.44772 15 7 14.5523 7 14V10Z" fill="white" opacity="0.85"/>
-                        <rect x="8.5" y="11" width="1" height="2" fill="rgba(0,0,0,0.4)"/>
-                        <rect x="8" y="11.5" width="2" height="1" fill="rgba(0,0,0,0.4)"/>
-                        <circle cx="14" cy="11.5" r="0.6" fill="rgba(0,0,0,0.4)"/>
-                        <circle cx="15.5" cy="12.5" r="0.6" fill="rgba(0,0,0,0.4)"/>
-                    </svg>
-                </div>
-                <span class="dock-label">Games</span>
-            </a>
-        </nav>
-    </div>
+    <!-- Dock loaded dynamically -->
+    <div id="dock-placeholder"></div>
+
+    <script>
+        // Load dock from separate file
+        fetch('dock.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('dock-placeholder').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading dock:', error));
+    </script>
 
     <script>
         // Mouse tracking for edge highlight effect
@@ -822,23 +762,14 @@
                         height: auto;
                         image-rendering: pixelated;
                         image-rendering: crisp-edges;
-                        box-shadow: inset 0 0 60px rgba(15, 56, 15, 0.2), 0 4px 12px rgba(0,0,0,0.3);
-                        border: 3px solid #0F380F;
                     "></canvas>
                     <div style="text-align: center; margin-top: 1rem; color: white;">
-                        <p style="font-size: 1.2rem; margin-bottom: 0.5rem; font-family: 'Courier New', monospace; color: #0F380F;">PRESS SPACE TO JUMP</p>
-                        <p id="score" style="font-size: 1.5rem; font-weight: bold; font-family: 'Courier New', monospace; color: #0F380F; letter-spacing: 2px;">SCORE: 0</p>
-                        <p id="gameOver" style="font-size: 1.3rem; color: #ff6b6b; display: none; margin-top: 1rem; font-family: 'Courier New', monospace;">GAME OVER! PRESS SPACE</p>
+                        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">Press SPACE to jump!</p>
+                        <p id="score" style="font-size: 1.5rem; font-weight: bold;">Score: 0</p>
+                        <p id="gameOver" style="font-size: 1.3rem; color: #ff6b6b; display: none; margin-top: 1rem;">Game Over! Press SPACE to restart</p>
                     </div>
                 `;
-                setTimeout(() => {
-                    try {
-                        initMonkeyJump();
-                    } catch (error) {
-                        console.error('Game initialization error:', error);
-                        container.innerHTML += `<p style="color: red; font-family: monospace;">Error loading game. Please refresh.</p>`;
-                    }
-                }, 100);
+                setTimeout(() => initMonkeyJump(), 100);
             } else {
                 title.textContent = `Game ${gameNumber}`;
                 container.innerHTML = `<p style="color: white;">Game ${gameNumber} will be loaded here</p>`;
@@ -857,8 +788,7 @@
             }
         }
 
-
-        // Monkey Jump Game - Game Boy Style
+        // Monkey Jump Game
         function initMonkeyJump() {
             const canvas = document.getElementById('gameCanvas');
             if (!canvas) return;
@@ -867,39 +797,29 @@
             const scoreDisplay = document.getElementById('score');
             const gameOverDisplay = document.getElementById('gameOver');
             
-            // Disable image smoothing for crisp pixels
-            ctx.imageSmoothingEnabled = false;
-            
-            // Game Boy color palette (DMG green)
-            const GB = {
-                darkest: '#0F380F',   // Black
-                dark: '#306230',      // Dark green
-                light: '#8BAC0F',     // Light green  
-                lightest: '#9BBC0F'   // White/lightest
-            };
-            
             // Game state
             let monkey = {
                 x: 100,
                 y: 300,
-                width: 32,
-                height: 32,
+                width: 50,
+                height: 50,
                 velocity: 0,
                 gravity: 0.5,
-                jump: -9,
-                animFrame: 0
+                jump: -10
             };
             
             let pipes = [];
             let score = 0;
             let gameOver = false;
             let frameCount = 0;
-            const groundHeight = 64;
             
-            // Create pipe
+            // Ground
+            const groundHeight = 100;
+            
+            // Create pipe (easier spacing)
             function createPipe() {
-                const gap = 200;
-                const minHeight = 60;
+                const gap = 220; // Larger gap for easier gameplay
+                const minHeight = 80;
                 const maxHeight = canvas.height - groundHeight - gap - minHeight;
                 const height = Math.random() * (maxHeight - minHeight) + minHeight;
                 
@@ -907,223 +827,541 @@
                     x: canvas.width,
                     topHeight: height,
                     bottomY: height + gap,
-                    width: 56,
+                    width: 70,
                     passed: false
                 });
             }
             
-            // Draw 8x8 pixel monkey sprite
+            // Draw round monkey (Super Monkey Ball style with glossy finish)
             function drawMonkey() {
-                const px = Math.floor(monkey.x);
-                const py = Math.floor(monkey.y);
-                const s = 4; // pixel size multiplier
+                ctx.save();
                 
-                // 8x8 monkey sprite pattern
-                const sprite = [
-                    [0,0,2,2,2,2,0,0],
-                    [0,2,3,2,2,3,2,0],
-                    [2,2,2,2,2,2,2,2],
-                    [2,1,1,2,2,1,1,2],
-                    [2,2,2,1,1,2,2,2],
-                    [2,2,1,2,2,1,2,2],
-                    [0,2,2,2,2,2,2,0],
-                    [0,0,2,0,0,2,0,0]
+                const centerX = monkey.x + monkey.width / 2;
+                const centerY = monkey.y + monkey.height / 2;
+                const radius = monkey.width / 2;
+                
+                // Shadow (glossy drop shadow)
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                ctx.beginPath();
+                ctx.ellipse(centerX + 3, centerY + radius + 5, radius * 0.9, radius * 0.4, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Main body (sphere with glossy gradient)
+                const bodyGradient = ctx.createRadialGradient(
+                    centerX - 10, centerY - 10, 5,
+                    centerX, centerY, radius
+                );
+                bodyGradient.addColorStop(0, '#E67E22');
+                bodyGradient.addColorStop(0.4, '#D35400');
+                bodyGradient.addColorStop(0.7, '#A04000');
+                bodyGradient.addColorStop(1, '#7D3C1F');
+                ctx.fillStyle = bodyGradient;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Glossy highlight (big shiny spot)
+                const highlightGradient = ctx.createRadialGradient(
+                    centerX - 12, centerY - 12, 0,
+                    centerX - 12, centerY - 12, 18
+                );
+                highlightGradient.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+                highlightGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.4)');
+                highlightGradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+                ctx.fillStyle = highlightGradient;
+                ctx.beginPath();
+                ctx.arc(centerX - 12, centerY - 12, 18, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Secondary shine
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.beginPath();
+                ctx.arc(centerX + 10, centerY - 8, 8, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Face area (lighter with gradient)
+                const faceGradient = ctx.createRadialGradient(
+                    centerX, centerY + 5, 5,
+                    centerX, centerY + 5, 20
+                );
+                faceGradient.addColorStop(0, '#F4C2A0');
+                faceGradient.addColorStop(1, '#E8A87C');
+                ctx.fillStyle = faceGradient;
+                ctx.beginPath();
+                ctx.ellipse(centerX, centerY + 5, 18, 16, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Ears (round with glossy gradient)
+                // Left ear
+                const earGradient = ctx.createRadialGradient(
+                    centerX - 24, centerY - 5, 2,
+                    centerX - 22, centerY - 5, 11
+                );
+                earGradient.addColorStop(0, '#E67E22');
+                earGradient.addColorStop(0.6, '#D35400');
+                earGradient.addColorStop(1, '#A04000');
+                ctx.fillStyle = earGradient;
+                ctx.beginPath();
+                ctx.arc(centerX - 22, centerY - 5, 11, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Left ear inner (glossy pink)
+                const innerEarGradient = ctx.createRadialGradient(
+                    centerX - 23, centerY - 5, 1,
+                    centerX - 22, centerY - 5, 7
+                );
+                innerEarGradient.addColorStop(0, '#FFB6C1');
+                innerEarGradient.addColorStop(1, '#FF9AB2');
+                ctx.fillStyle = innerEarGradient;
+                ctx.beginPath();
+                ctx.arc(centerX - 22, centerY - 5, 6, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Ear shine
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.beginPath();
+                ctx.arc(centerX - 24, centerY - 7, 3, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Right ear
+                ctx.fillStyle = earGradient;
+                ctx.beginPath();
+                ctx.arc(centerX + 22, centerY - 5, 11, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Right ear inner
+                ctx.fillStyle = innerEarGradient;
+                ctx.beginPath();
+                ctx.arc(centerX + 22, centerY - 5, 6, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Right ear shine
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+                ctx.beginPath();
+                ctx.arc(centerX + 20, centerY - 7, 3, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Eyes (glossy white with shading)
+                const eyeGradient = ctx.createRadialGradient(centerX - 8, centerY - 1, 1, centerX - 8, centerY, 6);
+                eyeGradient.addColorStop(0, '#FFFFFF');
+                eyeGradient.addColorStop(1, '#E8E8E8');
+                ctx.fillStyle = eyeGradient;
+                ctx.beginPath();
+                ctx.arc(centerX - 8, centerY, 5.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(centerX + 8, centerY, 5.5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Eye glossy highlights
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                ctx.beginPath();
+                ctx.arc(centerX - 10, centerY - 2, 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(centerX + 6, centerY - 2, 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Pupils (glossy black)
+                ctx.fillStyle = '#000';
+                ctx.beginPath();
+                ctx.arc(centerX - 7, centerY + 1, 3.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(centerX + 9, centerY + 1, 3.5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Pupil highlights
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                ctx.beginPath();
+                ctx.arc(centerX - 8, centerY, 1.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(centerX + 8, centerY, 1.5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Mouth (small smile)
+                ctx.strokeStyle = '#8B4513';
+                ctx.lineWidth = 2.5;
+                ctx.lineCap = 'round';
+                ctx.beginPath();
+                ctx.arc(centerX, centerY + 8, 6, 0.2, Math.PI - 0.2);
+                ctx.stroke();
+                
+                // Top tuft of hair (glossy)
+                const hairGradient = ctx.createRadialGradient(
+                    centerX, centerY - radius + 3, 2,
+                    centerX, centerY - radius + 5, 10
+                );
+                hairGradient.addColorStop(0, '#8B4513');
+                hairGradient.addColorStop(1, '#654321');
+                ctx.fillStyle = hairGradient;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY - radius + 5, 9, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Hair shine
+                ctx.fillStyle = 'rgba(139, 69, 19, 0.6)';
+                ctx.beginPath();
+                ctx.arc(centerX - 2, centerY - radius + 3, 4, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            }
+            
+            // Draw jungle background trees
+            function drawBackgroundTrees() {
+                // Background jungle trees (darker, behind everything)
+                const treePositions = [
+                    {x: 50, y: canvas.height - groundHeight - 120, scale: 0.8},
+                    {x: 200, y: canvas.height - groundHeight - 100, scale: 0.6},
+                    {x: 400, y: canvas.height - groundHeight - 140, scale: 0.9},
+                    {x: 600, y: canvas.height - groundHeight - 90, scale: 0.7},
+                    {x: 750, y: canvas.height - groundHeight - 110, scale: 0.75}
                 ];
                 
-                // 0=transparent, 1=darkest, 2=dark, 3=light
-                const colors = [null, GB.darkest, GB.dark, GB.light];
+                treePositions.forEach(tree => drawJungleTree(tree.x, tree.y, tree.scale));
+            }
+            
+            // Draw a jungle tree
+            function drawJungleTree(x, y, scale) {
+                ctx.save();
                 
-                sprite.forEach((row, y) => {
-                    row.forEach((pixel, x) => {
-                        if (pixel > 0) {
-                            ctx.fillStyle = colors[pixel];
-                            ctx.fillRect(px + x * s, py + y * s, s, s);
-                        }
-                    });
+                // Tree trunk with glossy gradient
+                const trunkGradient = ctx.createLinearGradient(x - 15 * scale, y, x + 15 * scale, y);
+                trunkGradient.addColorStop(0, '#5C4033');
+                trunkGradient.addColorStop(0.3, '#8B6F47');
+                trunkGradient.addColorStop(0.7, '#6F4E37');
+                trunkGradient.addColorStop(1, '#4A3728');
+                ctx.fillStyle = trunkGradient;
+                ctx.fillRect(x - 12 * scale, y, 24 * scale, 80 * scale);
+                
+                // Trunk highlight
+                ctx.fillStyle = 'rgba(139, 111, 71, 0.4)';
+                ctx.fillRect(x - 10 * scale, y, 8 * scale, 80 * scale);
+                
+                // Leafy canopy with multiple layers (glossy)
+                const canopyY = y - 20 * scale;
+                
+                // Back layer (darker)
+                ctx.fillStyle = '#1a5c1a';
+                ctx.beginPath();
+                ctx.arc(x, canopyY, 50 * scale, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Middle layer (medium green with gloss)
+                const canopyGradient = ctx.createRadialGradient(
+                    x - 15 * scale, canopyY - 15 * scale, 10,
+                    x, canopyY, 45 * scale
+                );
+                canopyGradient.addColorStop(0, '#4CAF50');
+                canopyGradient.addColorStop(0.5, '#2E7D32');
+                canopyGradient.addColorStop(1, '#1B5E20');
+                ctx.fillStyle = canopyGradient;
+                ctx.beginPath();
+                ctx.arc(x, canopyY, 45 * scale, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Front layer (bright green with highlights)
+                ctx.fillStyle = '#66BB6A';
+                ctx.beginPath();
+                ctx.arc(x + 10 * scale, canopyY + 10 * scale, 35 * scale, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Glossy highlights on leaves
+                const leafHighlight = ctx.createRadialGradient(
+                    x - 20 * scale, canopyY - 20 * scale, 0,
+                    x - 20 * scale, canopyY - 20 * scale, 25 * scale
+                );
+                leafHighlight.addColorStop(0, 'rgba(200, 255, 200, 0.6)');
+                leafHighlight.addColorStop(0.5, 'rgba(200, 255, 200, 0.2)');
+                leafHighlight.addColorStop(1, 'rgba(200, 255, 200, 0)');
+                ctx.fillStyle = leafHighlight;
+                ctx.beginPath();
+                ctx.arc(x - 20 * scale, canopyY - 20 * scale, 25 * scale, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            }
+            
+            // Draw palm tree obstacles (clean and polished)
+            function drawPipe(pipe) {
+                ctx.save();
+                
+                // Top palm tree
+                drawPalmTree(pipe.x, 0, pipe.width, pipe.topHeight, true);
+                
+                // Bottom palm tree
+                drawPalmTree(pipe.x, pipe.bottomY, pipe.width, canvas.height - groundHeight - pipe.bottomY, false);
+                
+                ctx.restore();
+            }
+            
+            // Draw clean palm tree
+            function drawPalmTree(x, y, width, height, isTop) {
+                // Trunk with nice gradient
+                const trunkGradient = ctx.createLinearGradient(x, 0, x + width, 0);
+                trunkGradient.addColorStop(0, '#8B6F47');
+                trunkGradient.addColorStop(0.5, '#A0826D');
+                trunkGradient.addColorStop(1, '#6F5939');
+                ctx.fillStyle = trunkGradient;
+                ctx.fillRect(x + 5, y, width - 10, height);
+                
+                // Trunk segments (horizontal lines)
+                ctx.strokeStyle = 'rgba(101, 67, 33, 0.4)';
+                ctx.lineWidth = 2;
+                for (let i = 0; i < height; i += 20) {
+                    ctx.beginPath();
+                    ctx.moveTo(x + 5, y + i);
+                    ctx.lineTo(x + width - 5, y + i);
+                    ctx.stroke();
+                }
+                
+                // Palm leaves
+                const leafY = isTop ? y + height - 15 : y + 15;
+                const leafAngles = [-0.8, -0.4, 0, 0.4, 0.8, -1.2, 1.2];
+                
+                leafAngles.forEach(angle => {
+                    drawPalmLeaf(x + width / 2, leafY, angle, isTop);
                 });
-            }
-            
-            // Draw pixel art tree
-            function drawTree(x, y, width, height, isTop) {
-                const s = 4; // pixel size
                 
-                // Trunk (centered column)
-                const trunkW = 12;
-                const trunkX = Math.floor(x + (width - trunkW) / 2);
-                
-                ctx.fillStyle = GB.dark;
-                ctx.fillRect(trunkX, y, trunkW, height);
-                
-                // Trunk rings
-                ctx.fillStyle = GB.darkest;
-                for (let i = 0; i < height; i += s * 4) {
-                    ctx.fillRect(trunkX, y + i, trunkW, s);
-                }
-                
-                // Canopy (circular blob)
-                const canopyY = isTop ? y + height - 20 : y + 20;
-                const canopyR = width / 2 + 8;
-                
-                // Draw pixelated circle for canopy
-                ctx.fillStyle = GB.darkest;
-                drawPixelCircle(Math.floor(x + width / 2), canopyY, canopyR + s);
-                
-                ctx.fillStyle = GB.dark;
-                drawPixelCircle(Math.floor(x + width / 2), canopyY, canopyR);
-            }
-            
-            // Draw pixelated circle
-            function drawPixelCircle(cx, cy, radius) {
-                const s = 4;
-                const r = Math.ceil(radius / s);
-                
-                for (let dy = -r; dy <= r; dy++) {
-                    for (let dx = -r; dx <= r; dx++) {
-                        if (dx * dx + dy * dy <= r * r) {
-                            ctx.fillRect(cx + dx * s - s / 2, cy + dy * s - s / 2, s, s);
-                        }
-                    }
+                // Coconuts
+                for (let i = 0; i < 3; i++) {
+                    const coconutX = x + width / 2 + (Math.random() - 0.5) * 20;
+                    const coconutY = leafY + (Math.random() - 0.5) * 10;
+                    
+                    const coconutGradient = ctx.createRadialGradient(
+                        coconutX - 3, coconutY - 3, 2,
+                        coconutX, coconutY, 8
+                    );
+                    coconutGradient.addColorStop(0, '#8B7355');
+                    coconutGradient.addColorStop(1, '#654321');
+                    ctx.fillStyle = coconutGradient;
+                    ctx.beginPath();
+                    ctx.arc(coconutX, coconutY, 8, 0, Math.PI * 2);
+                    ctx.fill();
                 }
             }
             
-            // Draw ground
+            // Draw individual palm leaf (clean version)
+            function drawPalmLeaf(x, y, angle, isTop) {
+                ctx.save();
+                ctx.translate(x, y);
+                
+                const baseAngle = isTop ? Math.PI : 0;
+                ctx.rotate(angle + baseAngle);
+                
+                // Leaf gradient
+                const leafGradient = ctx.createLinearGradient(0, 0, 50, 0);
+                leafGradient.addColorStop(0, '#2E7D32');
+                leafGradient.addColorStop(0.5, '#4CAF50');
+                leafGradient.addColorStop(1, '#66BB6A');
+                ctx.fillStyle = leafGradient;
+                
+                // Draw leaf shape
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.quadraticCurveTo(25, -12, 50, -8);
+                ctx.lineTo(50, 8);
+                ctx.quadraticCurveTo(25, 12, 0, 0);
+                ctx.fill();
+                
+                // Leaf highlight
+                ctx.fillStyle = 'rgba(144, 238, 144, 0.4)';
+                ctx.beginPath();
+                ctx.moveTo(5, 0);
+                ctx.quadraticCurveTo(20, -8, 35, -5);
+                ctx.lineTo(35, 5);
+                ctx.quadraticCurveTo(20, 8, 5, 0);
+                ctx.fill();
+                
+                ctx.restore();
+            }
+            
+            // Draw clean tropical ground
             function drawGround() {
-                const s = 4;
-                
-                // Base ground
-                ctx.fillStyle = GB.dark;
+                // Sand
+                const sandGradient = ctx.createLinearGradient(0, canvas.height - groundHeight, 0, canvas.height);
+                sandGradient.addColorStop(0, '#F5DEB3');
+                sandGradient.addColorStop(1, '#D2B48C');
+                ctx.fillStyle = sandGradient;
                 ctx.fillRect(0, canvas.height - groundHeight, canvas.width, groundHeight);
                 
-                // Dithered pattern
-                ctx.fillStyle = GB.darkest;
-                for (let y = canvas.height - groundHeight; y < canvas.height; y += s) {
-                    for (let x = 0; x < canvas.width; x += s * 2) {
-                        const offset = ((y / s) % 2) * s;
-                        ctx.fillRect(x + offset, y, s, s);
-                    }
+                // Sand texture (subtle)
+                ctx.fillStyle = 'rgba(210, 180, 140, 0.2)';
+                for (let i = 0; i < 80; i++) {
+                    const x = Math.random() * canvas.width;
+                    const y = canvas.height - groundHeight + Math.random() * groundHeight;
+                    ctx.beginPath();
+                    ctx.arc(x, y, Math.random() * 2 + 1, 0, Math.PI * 2);
+                    ctx.fill();
                 }
                 
-                // Grass tufts on top
-                ctx.fillStyle = GB.darkest;
-                for (let x = 0; x < canvas.width; x += s * 6) {
-                    const h = s * 3;
-                    ctx.fillRect(x, canvas.height - groundHeight - h, s, h);
-                    ctx.fillRect(x + s * 2, canvas.height - groundHeight - h - s, s, h + s);
-                    ctx.fillRect(x + s * 4, canvas.height - groundHeight - h, s, h);
+                // Grass tufts
+                for (let i = 0; i < canvas.width; i += 70) {
+                    const offset = (frameCount * 2) % 70;
+                    drawGrassTuft(i - offset, canvas.height - groundHeight);
+                }
+                
+                // Small bushes
+                for (let i = 50; i < canvas.width; i += 150) {
+                    const bushX = i + Math.sin(i) * 20;
+                    drawSmallBush(bushX, canvas.height - groundHeight - 10);
                 }
             }
             
-            // Draw clouds
-            function drawClouds() {
-                const s = 4;
-                const offset = Math.floor((frameCount * 0.3) % (canvas.width + 160));
-                
-                drawPixelCloud(140 - offset, 60);
-                drawPixelCloud(380 - offset, 100);
-                drawPixelCloud(620 - offset, 80);
+            // Draw grass tuft
+            function drawGrassTuft(x, y) {
+                for (let i = 0; i < 5; i++) {
+                    const bladeX = x + i * 4;
+                    const height = Math.random() * 8 + 10;
+                    
+                    const grassGradient = ctx.createLinearGradient(bladeX, y, bladeX, y - height);
+                    grassGradient.addColorStop(0, '#2E7D32');
+                    grassGradient.addColorStop(1, '#4CAF50');
+                    ctx.fillStyle = grassGradient;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(bladeX, y);
+                    ctx.quadraticCurveTo(bladeX + 1, y - height / 2, bladeX + 2, y - height);
+                    ctx.lineTo(bladeX + 3, y - height);
+                    ctx.quadraticCurveTo(bladeX + 2, y - height / 2, bladeX + 1, y);
+                    ctx.fill();
+                }
             }
             
-            function drawPixelCloud(x, y) {
-                const s = 4;
-                ctx.fillStyle = GB.light;
+            // Draw small bush
+            function drawSmallBush(x, y) {
+                // Main bush
+                const bushGradient = ctx.createRadialGradient(x, y - 5, 5, x, y, 15);
+                bushGradient.addColorStop(0, '#66BB6A');
+                bushGradient.addColorStop(1, '#388E3C');
+                ctx.fillStyle = bushGradient;
+                ctx.beginPath();
+                ctx.arc(x - 8, y, 12, 0, Math.PI * 2);
+                ctx.arc(x + 8, y, 12, 0, Math.PI * 2);
+                ctx.arc(x, y - 8, 14, 0, Math.PI * 2);
+                ctx.fill();
                 
-                // Simple cloud shape
-                const cloud = [
-                    [0,1,1,1,1,0],
-                    [1,1,1,1,1,1],
-                    [1,1,1,1,1,1],
-                    [0,1,1,1,1,0]
-                ];
-                
-                cloud.forEach((row, ry) => {
-                    row.forEach((pixel, rx) => {
-                        if (pixel) {
-                            ctx.fillRect(x + rx * s * 2, y + ry * s * 2, s * 2, s * 2);
-                        }
-                    });
-                });
-            }
-            
-            // Draw background trees
-            function drawBackgroundTrees() {
-                const s = 4;
-                const positions = [60, 220, 420, 600, 740];
-                
-                ctx.fillStyle = GB.light;
-                positions.forEach(x => {
-                    const h = 48;
-                    const treeY = canvas.height - groundHeight - h;
-                    
-                    // Simple trunk
-                    ctx.fillRect(x, treeY, s * 2, h);
-                    
-                    // Simple canopy
-                    drawPixelCircle(x + s, treeY - s * 2, s * 4);
-                });
+                // Highlight
+                ctx.fillStyle = 'rgba(200, 255, 200, 0.4)';
+                ctx.beginPath();
+                ctx.arc(x - 5, y - 10, 6, 0, Math.PI * 2);
+                ctx.fill();
             }
             
             // Check collision
             function checkCollision() {
-                if (monkey.y + monkey.height >= canvas.height - groundHeight) return true;
-                if (monkey.y <= 0) return true;
+                // Ground collision
+                if (monkey.y + monkey.height >= canvas.height - groundHeight) {
+                    return true;
+                }
                 
-                const margin = 6;
+                // Ceiling collision
+                if (monkey.y <= 0) {
+                    return true;
+                }
+                
+                // Pipe collision (with some margin for forgiveness)
+                const hitboxMargin = 5;
                 for (let pipe of pipes) {
-                    if (monkey.x + monkey.width - margin > pipe.x && 
-                        monkey.x + margin < pipe.x + pipe.width) {
-                        if (monkey.y + margin < pipe.topHeight || 
-                            monkey.y + monkey.height - margin > pipe.bottomY) {
+                    if (monkey.x + monkey.width - hitboxMargin > pipe.x && 
+                        monkey.x + hitboxMargin < pipe.x + pipe.width) {
+                        if (monkey.y + hitboxMargin < pipe.topHeight || 
+                            monkey.y + monkey.height - hitboxMargin > pipe.bottomY) {
                             return true;
                         }
                     }
                 }
+                
                 return false;
+            }
+            
+            // Draw fluffy glossy clouds
+            function drawClouds() {
+                const cloudOffset = (frameCount * 0.5) % (canvas.width + 300);
+                
+                drawCloud(150 - cloudOffset, 100, 1);
+                drawCloud(450 - cloudOffset, 150, 0.8);
+                drawCloud(750 - cloudOffset, 80, 1.2);
+            }
+            
+            function drawCloud(x, y, scale) {
+                // Cloud shadow
+                ctx.fillStyle = 'rgba(100, 149, 237, 0.2)';
+                ctx.beginPath();
+                ctx.arc(x + 2, y + 2, 25 * scale, 0, Math.PI * 2);
+                ctx.arc(x + 22 * scale, y + 2, 30 * scale, 0, Math.PI * 2);
+                ctx.arc(x + 47 * scale, y + 2, 25 * scale, 0, Math.PI * 2);
+                ctx.arc(x + 27 * scale, y - 13 * scale, 20 * scale, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Main cloud (glossy white)
+                const cloudGradient = ctx.createRadialGradient(
+                    x + 20 * scale, y - 10 * scale, 10,
+                    x + 25 * scale, y, 40 * scale
+                );
+                cloudGradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+                cloudGradient.addColorStop(0.7, 'rgba(255, 255, 255, 0.95)');
+                cloudGradient.addColorStop(1, 'rgba(245, 245, 255, 0.9)');
+                ctx.fillStyle = cloudGradient;
+                ctx.beginPath();
+                ctx.arc(x, y, 25 * scale, 0, Math.PI * 2);
+                ctx.arc(x + 20 * scale, y, 30 * scale, 0, Math.PI * 2);
+                ctx.arc(x + 45 * scale, y, 25 * scale, 0, Math.PI * 2);
+                ctx.arc(x + 25 * scale, y - 15 * scale, 20 * scale, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Glossy highlights on cloud
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                ctx.beginPath();
+                ctx.arc(x + 15 * scale, y - 10 * scale, 10 * scale, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(x + 35 * scale, y - 8 * scale, 8 * scale, 0, Math.PI * 2);
+                ctx.fill();
             }
             
             // Game loop
             function gameLoop() {
                 if (!gameOver) {
-                    // Clear with lightest color
-                    ctx.fillStyle = GB.lightest;
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    // Clear canvas
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
                     
                     // Draw clouds
                     drawClouds();
                     
-                    // Draw background trees
+                    // Draw background jungle trees
                     drawBackgroundTrees();
                     
                     // Update monkey
                     monkey.velocity += monkey.gravity;
                     monkey.y += monkey.velocity;
-                    monkey.animFrame++;
                     
-                    // Spawn pipes
+                    // Update pipes (slower speed)
                     frameCount++;
-                    if (frameCount % 110 === 0) {
+                    if (frameCount % 120 === 0) { // Spawn less frequently
                         createPipe();
                     }
                     
-                    // Update pipes
                     for (let i = pipes.length - 1; i >= 0; i--) {
-                        pipes[i].x -= 2;
+                        pipes[i].x -= 2.5; // Slower movement
                         
+                        // Score when passing pipe
                         if (!pipes[i].passed && pipes[i].x + pipes[i].width < monkey.x) {
                             pipes[i].passed = true;
                             score++;
-                            scoreDisplay.textContent = `SCORE: ${score}`;
+                            scoreDisplay.textContent = `Score: ${score}`;
                         }
                         
+                        // Remove off-screen pipes
                         if (pipes[i].x + pipes[i].width < 0) {
                             pipes.splice(i, 1);
                         }
                     }
                     
                     // Draw pipes
-                    pipes.forEach(pipe => {
-                        drawTree(pipe.x, 0, pipe.width, pipe.topHeight, true);
-                        drawTree(pipe.x, pipe.bottomY, pipe.width, canvas.height - groundHeight - pipe.bottomY, false);
-                    });
+                    pipes.forEach(pipe => drawPipe(pipe));
                     
                     // Draw ground
                     drawGround();
@@ -1139,6 +1377,7 @@
                     
                     window.gameLoop = requestAnimationFrame(gameLoop);
                 } else {
+                    // Game over state
                     window.gameLoop = requestAnimationFrame(gameLoop);
                 }
             }
@@ -1149,24 +1388,6 @@
                     e.preventDefault();
                     
                     if (gameOver) {
-                        monkey.y = 300;
-                        monkey.velocity = 0;
-                        pipes = [];
-                        score = 0;
-                        gameOver = false;
-                        frameCount = 0;
-                        scoreDisplay.textContent = 'SCORE: 0';
-                        gameOverDisplay.style.display = 'none';
-                    } else {
-                        monkey.velocity = monkey.jump;
-                    }
-                }
-            }
-            
-            document.addEventListener('keydown', handleKeyPress);
-            gameLoop();
-        }
-                    if (gameOver) {
                         // Restart game
                         monkey.y = 300;
                         monkey.velocity = 0;
@@ -1174,7 +1395,7 @@
                         score = 0;
                         gameOver = false;
                         frameCount = 0;
-                        scoreDisplay.textContent = 'SCORE: 0';
+                        scoreDisplay.textContent = 'Score: 0';
                         gameOverDisplay.style.display = 'none';
                     } else {
                         // Jump
