@@ -639,8 +639,8 @@
     </div>
 
     <script>
-        // Gallery automatically reads project folders from gallery.md
-        // Edit gallery.md to add/remove projects - no need to edit this HTML!
+        // Gallery automatically reads project folders from gallery.json
+        // Edit gallery.json to add/remove projects - no need to edit this HTML!
         
         let currentProject = null;
         let currentPhotoIndex = 0;
@@ -652,23 +652,21 @@
             loadProjects();
         });
 
-        // Load project list from gallery.md
+        // Load project list from gallery.json
         async function loadProjectsFromFile() {
             try {
-                const response = await fetch('gallery.md');
-                const text = await response.text();
-                
-                // Parse the markdown file
-                YOUR_PROJECTS = text
-                    .split('\n')
-                    .map(line => line.trim())
-                    .filter(line => line && !line.startsWith('#')) // Remove empty lines and comments
-                    .filter(line => line.length > 0);
-                
+                const response = await fetch('gallery.json');
+                if (!response.ok) {
+                    throw new Error('Could not load gallery.json');
+                }
+                const data = await response.json();
+                YOUR_PROJECTS = data.projects || [];
                 console.log('Loaded projects:', YOUR_PROJECTS);
             } catch (error) {
-                console.error('Error loading gallery.md:', error);
-                console.log('Make sure gallery.md exists in the same directory as gallery.html');
+                console.error('Error loading gallery.json:', error);
+                console.log('Make sure gallery.json exists in the same directory as gallery.html');
+                // Fallback to empty array if file doesn't exist
+                YOUR_PROJECTS = [];
             }
         }
 
@@ -681,7 +679,7 @@
                     <div style="grid-column: 1/-1; text-align: center; padding: 4rem 2rem; color: rgba(255,255,255,0.7);">
                         <div style="font-size: 4rem; margin-bottom: 1rem;">📁</div>
                         <h2 style="font-size: 2rem; margin-bottom: 1rem; color: white;">No Projects Found</h2>
-                        <p style="font-size: 1.2rem;">Add your folder names to YOUR_PROJECTS list in gallery.html</p>
+                        <p style="font-size: 1.2rem;">Add your folder names to gallery.md</p>
                     </div>
                 `;
                 return;
@@ -696,15 +694,59 @@
                     openProject({ name: folderName, folder: folderName });
                 };
 
+                // Try multiple image formats
+                const testImg = new Image();
                 const coverPath = `gallery/${folderName}/1.jpg`;
                 
-                card.innerHTML = `
-                    <div class="project-card-bg" style="background-image: url('${coverPath}');"></div>
-                    <div class="project-card-content">
-                        <div class="project-card-icon">📁</div>
-                        <div class="project-card-title">${folderName}</div>
-                    </div>
-                `;
+                testImg.onload = () => {
+                    const bg = card.querySelector('.project-card-bg');
+                    if (bg) {
+                        bg.style.backgroundImage = `url('${coverPath}')`;
+                    }
+                };
+                
+                testImg.onerror = () => {
+                    // Try other formats if jpg fails
+                    const formats = ['jpeg', 'png', 'gif', 'webp'];
+                    let found = false;
+                    
+                    formats.forEach(ext => {
+                        if (!found) {
+                            const altImg = new Image();
+                            const altPath = `gallery/${folderName}/1.${ext}`;
+                            altImg.onload = () => {
+                                found = true;
+                                const bg = card.querySelector('.project-card-bg');
+                                if (bg) {
+                                    bg.style.backgroundImage = `url('${altPath}')`;
+                                }
+                            };
+                            altImg.src = altPath;
+                        }
+                    });
+                };
+                
+                testImg.src = coverPath;
+                
+                // Create card structure
+                const cardBg = document.createElement('div');
+                cardBg.className = 'project-card-bg';
+                
+                const cardContent = document.createElement('div');
+                cardContent.className = 'project-card-content';
+                
+                const cardIcon = document.createElement('div');
+                cardIcon.className = 'project-card-icon';
+                cardIcon.textContent = '📁';
+                
+                const cardTitle = document.createElement('div');
+                cardTitle.className = 'project-card-title';
+                cardTitle.textContent = folderName;
+                
+                cardContent.appendChild(cardIcon);
+                cardContent.appendChild(cardTitle);
+                card.appendChild(cardBg);
+                card.appendChild(cardContent);
 
                 grid.appendChild(card);
             });
