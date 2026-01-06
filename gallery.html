@@ -41,12 +41,12 @@
         }
 
         .content-wrapper {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 28px;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
                         0 2px 8px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
@@ -57,13 +57,13 @@
 
         .content-wrapper:hover {
             transform: scale(1.025);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
                         0 12px 32px rgba(0, 0, 0, 0.35);
         }
 
         .content-wrapper.touch-active {
             transform: scale(1.04);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
                         0 16px 48px rgba(0, 0, 0, 0.4);
             transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
                         box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -98,6 +98,13 @@
             display: none;
         }
 
+        .inner-glass-layer {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            min-height: 100%;
+        }
+
         h1 {
             font-size: 3rem;
             font-weight: 700;
@@ -116,6 +123,9 @@
 
         .gallery-content {
             padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .projects-grid {
@@ -644,6 +654,7 @@
                 </a>
             </div>
 
+            <div class="inner-glass-layer">
             <h1>Gallery</h1>
             <p class="subtitle">Explore my projects</p>
 
@@ -657,6 +668,7 @@
                     <h2 class="project-title" id="currentProjectTitle"></h2>
                     <div class="photos-grid" id="photosGrid"></div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
