@@ -31,12 +31,30 @@
         .content-wrapper {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 28px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.8s ease;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                        0 2px 8px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1), 
+                        box-shadow 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .content-wrapper:hover {
+            transform: scale(1.025);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                        0 12px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .content-wrapper.touch-active {
+            transform: scale(1.04);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                        0 16px 48px rgba(0, 0, 0, 0.4);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
+                        box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .content-wrapper::before {
@@ -60,18 +78,8 @@
             opacity: 1;
         }
 
-        .content-wrapper.touch-active {
-            transform: scale(1.02);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
         .content-wrapper.touch-active::before {
             opacity: 1;
-        }
-
-        .content-wrapper:hover {
-            transform: scale(1.025);
         }
 
         h1 {
@@ -611,7 +619,7 @@
                     </svg>
                     <span class="tooltip">Bluesky</span>
                 </a>
-                <a href="mailto:your-email@example.com" class="stoplight-btn">
+                <a href="/cdn-cgi/l/email-protection#2d5442585f0048404c44416d48554c405d4148034e4240" class="stoplight-btn">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/>
                         <path d="M3 7L12 13L21 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -655,7 +663,7 @@
     <!-- Dock loaded dynamically -->
     <div id="dock-placeholder"></div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Load dock from separate file
         fetch('dock.html')
             .then(response => response.text())
@@ -958,9 +966,10 @@
             if (animationFrame) {
                 cancelAnimationFrame(animationFrame);
             }
+            // Longer delay for that liquid glass settling effect
             setTimeout(() => {
                 contentWrapper.classList.remove('touch-active');
-            }, 300);
+            }, 800);
         });
     </script>
 </body>
