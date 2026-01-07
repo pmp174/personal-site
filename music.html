@@ -687,6 +687,16 @@
                 text-align: center;
             }
         }
+
+        /* Dock styling fixes - ensure dock renders correctly */
+        #dock-placeholder * {
+            box-sizing: border-box;
+        }
+
+        #dock-placeholder svg {
+            width: auto !important;
+            height: auto !important;
+        }
     </style>
 </head>
 <body>
